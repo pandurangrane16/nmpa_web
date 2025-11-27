@@ -6,11 +6,13 @@ import { RouterLink } from "@angular/router";
 import { AuthNavbarComponent } from "../../components/navbars/auth-navbar/auth-navbar.component";
 import { CardTableComponent } from "../../components/cards/card-table/card-table.component";
 import { CmButton } from "../../components/cm-button/cm-button";
+import { CmTextarea } from "../../components/cm-textarea/cm-textarea";
+import { CmInput } from "../../components/cm-input/cm-input";
 
 @Component({
   selector: "app-landing",
   templateUrl: "./landing.component.html",
-  imports: [FooterComponent, CommonModule, AuthNavbarComponent, CardTableComponent, CmButton,FormsModule],
+  imports: [FooterComponent, CommonModule, AuthNavbarComponent, CardTableComponent, CmButton, FormsModule, CmTextarea, CmInput],
   standalone:true
 })
 export class LandingComponent implements OnInit {
@@ -19,4 +21,11 @@ export class LandingComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  getInputData(evt :any){
+    this.fullName = evt;
+  }
+  getTextAreaData(evt :any){
+    this.description = evt;
+  }
 }
