@@ -1,0 +1,9 @@
+<div class="w-full">
+    <input type="date" [(ngModel)]="selectedDate" class="border px-3 py-2 rounded w-full" />
+    @if(includeTime == "true"){
+    <div class="mt-3">
+        <label class="block text-sm font-semibold mb-1">Select Time</label>
+        <input type="time" [(ngModel)]="selectedTime" class="border px-3 py-2 rounded w-full" />
+    </div>
+    }
+</div>

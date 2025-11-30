@@ -18,6 +18,7 @@ import { RegisterComponent } from "./views/auth/register/register.component";
 import { IndexComponent } from "./views/index/index.component";
 import { LandingComponent } from "./views/landing/landing.component";
 import { ProfileComponent } from "./views/profile/profile.component";
+import { EditCompany } from './views/user/edit-company/edit-company';
 
 export const routes: Routes = [
   {
@@ -41,6 +42,7 @@ export const routes: Routes = [
     ],
   },
   { path: 'profile', component: ProfileComponent },
+  { path: 'edit-profile', component: EditCompany },
   { path: 'landing', component: LandingComponent },
   { path: '', component: IndexComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },

@@ -3834,6 +3834,10 @@ select {
     padding-top: 8rem;
   }
 
+  .md\:pt-16 {
+    padding-top: 5rem;
+  }
+
   .md\:fixed {
     position: fixed;
   }
@@ -4160,4 +4164,56 @@ select {
 .hover-underline:hover::after,
 .hover-underline:hover::before {
   transform: scaleX(1);
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+}
+
+.card-front {
+  background: white;
+  border: 1px solid #e5e7eb;
+}
+
+.card-back {
+  background: white;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.slider {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.slide-text {
+  display: inline-block;
+  padding-left: 100%;
+  animation: slide 30s linear infinite;
+}
+
+@keyframes slide {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
 }

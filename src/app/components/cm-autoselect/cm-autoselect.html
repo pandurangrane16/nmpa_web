@@ -1,0 +1,28 @@
+<div class="w-full relative">
+  <!-- Search box -->
+  <input
+    type="text"
+    [(ngModel)]="searchText"
+    (input)="filterOptions()"
+    placeholder="Search state..."
+    class="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+  />
+
+  <!-- Dropdown -->
+  <div
+    *ngIf="showDropdown"
+    class="absolute z-50 w-full bg-white border rounded-lg shadow-lg mt-1 max-h-56 overflow-y-auto"
+  >
+    <div
+      *ngFor="let option of filteredList"
+      (click)="selectOption(option)"
+      class="px-3 py-2 cursor-pointer hover:bg-blue-100 text-sm"
+    >
+      {{ option }}
+    </div>
+
+    <div *ngIf="filteredList.length === 0" class="px-3 py-2 text-gray-500 text-sm">
+      No results found
+    </div>
+  </div>
+</div>

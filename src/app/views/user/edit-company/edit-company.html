@@ -1,0 +1,140 @@
+<app-auth-navbar></app-auth-navbar>
+<main class="profile-page">
+    <section class="relative block h-500-px">
+        <div class="absolute top-0 w-full h-full bg-center bg-cover" style="
+        background-image: url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2710&q=80');
+      ">
+            <span id="blackOverlay" class="w-full h-full absolute opacity-50 bg-black"></span>
+        </div>
+        <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
+            style="transform: translateZ(0)">
+            <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
+                version="1.1" viewBox="0 0 2560 100" x="0" y="0">
+                <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
+            </svg>
+        </div>
+    </section>
+    <section class="relative py-16 bg-blueGray-200">
+        <div class="container mx-auto px-4">
+            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64 bg-form-theme">
+                <div class="px-6">
+                    <div class="flex flex-wrap">
+                        <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
+                            <div class="relative">
+                                <img alt="..." src="assets/img/team-2-800x800.jpg"
+                                    class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px" />
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-6/12 px-4 lg:order-1">
+                            <div class="flex py-4 lg:pt-4 pt-8">
+                                <div class="mr-5 p-3 text-center">
+                                    <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                                        22
+                                    </span>
+                                    <span class="text-sm text-blueGray-400">Registered Vehicle</span>
+                                </div>
+                                <div class="mr-5 p-3 text-center">
+                                    <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                                        10
+                                    </span>
+                                    <span class="text-sm text-blueGray-400">Registered User</span>
+                                </div>
+                                <div class="lg:mr-5 p-3 text-center">
+                                    <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                                        89
+                                    </span>
+                                    <span class="text-sm text-blueGray-400">Pass Created</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="text-center mt-12 ">
+                        <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 title">
+                            CMS COMPUTERS INDIA PRIVATE LIMITED
+                        </h3>
+                        <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
+                            <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
+                            Mumbai, India
+                        </div>
+                        <div class="mb-2 text-blueGray-600 mt-10">
+                            <i class="fas fa-envelope mr-2 text-lg text-blueGray-400"></i>
+                            Email : shivaram_shetty@cms.co.in
+                        </div>
+                        <div class="mb-2 text-blueGray-600">
+                            <i class="fas fa-phone mr-2 text-lg text-blueGray-400"></i>
+                            Contact : 9482090490
+                        </div>
+                        <div class="mb-2 text-blueGray-600">
+                            <i class="fas fa-hourglass mr-2 text-lg text-blueGray-400"></i>
+                            License Expiry : 31-07-2029 23:59:59
+                        </div>
+                    </div>
+                    <div class="mt-10 flex flex-col py-10 border-t border-blueGray-200 text-center">
+                        <div class="flex flex-wrap justify-center">
+                            <div class="w-full lg:w-9/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="message">
+                                        Address
+                                    </label>
+                                    <app-cm-textarea [inputText]="inputText"
+                                        (inputOut)="getTextAreaData($event)"></app-cm-textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-2/12 px-4 lg:order-1">
+                            <div class="flex justify-center py-4 lg:pt-4 pt-8">
+                                <table class="table-auto w-full text-left border-collapse">
+                                    <tr>
+                                        <th class="px-4 py-2 border">Recommended Company</th>
+                                        <td class="px-4 py-2 border"><app-cm-input placeholder="Recommended Company"
+                                                [inputText]="inputRecComp"></app-cm-input></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="px-4 py-2 border">Registered For GST?</th>
+                                        <td class="px-4 py-2 border"><app-cm-toggle labelVal=""
+                                                (toggleOut)="GSTChange($event)"></app-cm-toggle></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="px-4 py-2 border">GSTIN Number</th>
+                                        <td class="px-4 py-2 border"><app-cm-input placeholder="GSTIN Number"
+                                                [inputText]="inputGstinNumber"></app-cm-input></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="px-4 py-2 border">PCSID</th>
+                                        <td class="px-4 py-2 border"><app-cm-input placeholder="PCSID"
+                                                [inputText]="inputPCSID"></app-cm-input></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="px-4 py-2 border">State</th>
+                                        <td class="px-4 py-2 border">
+                                            <app-cm-autoselect (selectOut)="onStateSelect($event)"></app-cm-autoselect>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th class="px-4 py-2 border">Licence/Document Issue Date</th>
+                                        <td class="px-4 py-2 border"><app-cm-datetime includeTime="false"></app-cm-datetime></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="px-4 py-2 border">PAN Number</th>
+                                        <td class="px-4 py-2 border"><app-cm-input placeholder="PAN Number"
+                                                [inputText]="inputPANNumber"></app-cm-input></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="justify-right">
+                                            <app-cm-button btnText="Submit" inputVal="editCompanyDetails" (clicked)="SaveCompanyDetails($event)"></app-cm-button>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <app-footer></app-footer>
+</main>
