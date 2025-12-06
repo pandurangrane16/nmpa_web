@@ -4249,3 +4249,33 @@ select {
 .animate-modal {
   animation: modalOpen 0.2s ease-out forwards;
 }
+
+.btn-style506 {
+  position: relative;
+  border-color: #dd7e2a;
+  color: #dd7e2a;
+  overflow: hidden;
+}
+
+.btn-style506::before {
+  width: 20%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  background-color: #dd7e2a;
+  transform: rotateZ(-45deg) translate(-50%, -50%);
+  transition: all 0.3s;
+  content: "";
+  z-index: -1;
+}
+
+.btn-style506:hover {
+  color: #fff;
+}
+
+.btn-style506:hover::before {
+  width: 100%;
+  top: 0;
+  transform: none;
+}
