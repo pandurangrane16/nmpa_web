@@ -19,6 +19,8 @@ import { IndexComponent } from "./views/index/index.component";
 import { LandingComponent } from "./views/landing/landing.component";
 import { ProfileComponent } from "./views/profile/profile.component";
 import { EditCompany } from './views/user/edit-company/edit-company';
+import { UserComponent } from './views/user/user/user.component';
+import { UserProfileComponent } from './views/user/user-profile/user-profile.component';
 
 export const routes: Routes = [
   {
@@ -41,6 +43,15 @@ export const routes: Routes = [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
     ],
   },
+  {
+      path: "user",
+      component: UserComponent,
+      children: [
+        { path: "user-profile", component: UserProfileComponent },
+        { path: "", component: UserProfileComponent },
+        { path: "", redirectTo: "user-profile", pathMatch: "full" },
+      ]
+    },
   { path: 'profile', component: ProfileComponent },
   { path: 'edit-profile', component: EditCompany },
   { path: 'landing', component: LandingComponent },

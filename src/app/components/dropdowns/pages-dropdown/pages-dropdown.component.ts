@@ -61,22 +61,47 @@ keepDropdownOpen: any;
   ngOnInit() {
    
   }
-  toggleDropdown(event:any) {
-    event.preventDefault();
-    if (this.dropdownPopoverShow) {
-      this.dropdownPopoverShow = false;
-    } else {
-      this.dropdownPopoverShow = true;
-      this.createPoppper();
+  dropdown1 = false;
+dropdown2 = false;
+
+@ViewChild('btnDropdownRef1') btn1: any;
+@ViewChild('popoverDropdownRef1') pop1: any;
+
+@ViewChild('btnDropdownRef2') btn2: any;
+@ViewChild('popoverDropdownRef2') pop2: any;
+
+toggleDropdown(event: any, menu: string) {
+  event.preventDefault();
+
+  if (menu === 'menu1') {
+    this.dropdown1 = !this.dropdown1;
+    this.dropdown2 = false;
+
+    if (this.dropdown1) {
+      this.createPopper(this.btn1, this.pop1);
     }
   }
+
+  if (menu === 'menu2') {
+    this.dropdown2 = !this.dropdown2;
+    this.dropdown1 = false;
+
+    if (this.dropdown2) {
+      this.createPopper(this.btn2, this.pop2);
+    }
+  }
+}
+
+createPopper(btn: any, pop: any) {
+  createPopper(btn.nativeElement, pop.nativeElement, {
+    placement: "bottom-start",
+  });
+}
   createPoppper() {
-    createPopper(
-      this.btnDropdownRef.nativeElement,
+     this.btnDropdownRef.nativeElement,
       this.popoverDropdownRef.nativeElement,
       {
         placement: "bottom-start",
       }
-    );
   }
 }
