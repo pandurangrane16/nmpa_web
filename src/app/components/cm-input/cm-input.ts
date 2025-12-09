@@ -13,7 +13,7 @@ export class CmInput implements OnInit {
   @Input() inputText: string = "";
   @Output() inputOut = new EventEmitter<any>();
   inputVal: any;
-
+ @Input() autocomplete: string = "off";
   ngOnInit(): void {
     this.inputVal = this.inputText;
   }

@@ -1,28 +1,150 @@
-<p>User Profile Works</p>
+<main class="profile-page">
+    <section class="relative block h-500-px">
+        <div class="absolute top-0 w-full h-full bg-center bg-cover" style="
+            background-image: url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80');
+          ">
+            <span id="blackOverlay" class="w-full h-full absolute opacity-50 bg-black"></span>
+        </div>
+        <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
+            style="transform: translateZ(0px)">
+            <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
+                version="1.1" viewBox="0 0 2560 100" x="0" y="0">
+                <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
+            </svg>
+        </div>
+    </section>
+    @if(!isEditMode) {
+    <section class="relative py-16 bg-blueGray-200">
+        <div class="container mx-auto px-4">
+            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+                <div class="px-6">
+                    <div class="flex flex-wrap justify-center">
+                        <div class="w-full lg:w-2/12 px-4 lg:order-1 flex justify-center">
+                            <div class="relative">
+                                <img alt="..."
+                                    src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg"
+                                    class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px">
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-10/12 px-4 lg:order-2 lg:text-right lg:self-center">
+                            <div class="py-6 px-3 mt-32 sm:mt-0">
+                                <app-cm-button btnText="Edit Profile" inputVal="editCompanyDetails"
+                                    (clicked)="EditDetails($event)"></app-cm-button>
+                            </div>
+                        </div>
 
-<div class="min-h-screen bg-gray-100 py-10">
-  <div class="max-w-3xl mx-auto bg-white shadow-lg rounded-xl p-6">
+                    </div>
+                    <div class="text-center mt-12">
+                        <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
+                            Jenna Stones
+                        </h3>
+                        <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
+                            <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
+                            Los Angeles, California
+                        </div>
+                        <div class="mb-2 text-blueGray-600 mt-10">
+                            <i class="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>Solution Manager - Creative
+                            Tim Officer
+                        </div>
+                        <div class="mb-2 text-blueGray-600">
+                            <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i>University of Computer
+                            Science
+                        </div>
+                    </div>
+                    <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
+                        <div class="flex flex-wrap justify-center">
+                            <div class="w-full lg:w-9/12 px-4">
+                                <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
+                                    An artist of considerable range, Jenna the name taken by
+                                    Melbourne-raised, Brooklyn-based Nick Murphy writes,
+                                    performs and records all of his own music, giving it a
+                                    warm, intimate feel with a solid groove structure. An
+                                    artist of considerable range.
+                                </p>
+                                <a href="#pablo" class="font-normal text-pink-500">Show more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-footer></app-footer>
+    </section>
+    }
+    <section class="relative py-16 bg-blueGray-200">
+        @if(isEditMode) {
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap">
+                <div class="w-full lg:w-2/12 px-4">
+                    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg">
+                        <div class="flex-auto p-5 lg:p-10">
+                            <h4 class="text-2xl font-semibold">Edit Profile</h4>
+                            <hr>
+                            <form>
+                                <div
+                                    class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+                                    <div class="px-6">
+                                        <div class="flex flex-wrap justify-center">
+                                            <div class="w-full lg:w-2/12 px-4 lg:order-1 flex justify-center">
+                                                <div class="relative">
+                                                    <img alt="..."
+                                                        [src]="previewUrl"
+                                                        class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                                                        (click)="fileInput.click()" />
+                                                    <div class="absolute bottom-0 right-0 bg-white rounded-full p-2 shadow cursor-pointer"
+                                                        (click)="fileInput.click()">
+                                                        <i class="fas fa-edit text-gray-700"></i>
+                                                    </div>
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                                </div>
+                                                <br>
+                                                <input type="file" accept="image/*" #fileInput hidden
+                                                    (change)="preview($event)" />
+                                            </div>
+                                        </div>
+                                        <div class="relative w-full mb-3 mt-8">
+                                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                for="full-name">Full Name</label>
+                                            <app-cm-input placeholder="Full Name"
+                                                [inputText]="inputFullName"></app-cm-input>
+                                        </div>
 
-    <div class="flex flex-col items-center">
-      <img [src]="user.avatar"
-           class="w-32 h-32 rounded-full shadow-md border-4 border-white -mt-20" />
+                                        <div class="relative w-full mb-3">
+                                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                for="email">Email</label>
+                                            <app-cm-input placeholder="Email" [inputText]="inputEmail"></app-cm-input>
+                                        </div>
 
-      <h2 class="text-3xl font-bold mt-4">{{ user.name }}</h2>
-      <p class="text-gray-500">{{ user.email }}</p>
-    </div>
+                                        <div class="relative w-full mb-3">
+                                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                for="email">Contact Number</label>
+                                            <app-cm-input placeholder="Contact Number"
+                                                [inputText]="inputContact"></app-cm-input>
+                                        </div>
 
-    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                        <div class="relative w-full mb-3">
+                                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                for="email">Address</label>
+                                            <app-cm-textarea placeholder="Address"
+                                                [inputText]="inputAddress"></app-cm-textarea>
+                                        </div>
 
-      <div>
-        <label class="text-gray-400 text-sm">Phone</label>
-        <p class="text-gray-700 font-medium">{{ user.phone }}</p>
-      </div>
+                                        <div class="text-center mt-6">
+                                            <app-cm-button btnText="Submit" inputVal="editUserDetails"
+                                                (clicked)="EditUserDetails($event)"></app-cm-button>
+                                        </div>
 
-      <div>
-        <label class="text-gray-400 text-sm">Address</label>
-        <p class="text-gray-700 font-medium">{{ user.address }}</p>
-      </div>
-
-    </div>
-  </div>
-</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <app-footer></app-footer>
+        </div>
+        }
+    </section>
+</main>

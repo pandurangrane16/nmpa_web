@@ -12,6 +12,7 @@ export class CmTextarea implements OnInit {
   @Input() class : string = "border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded right-container text-sm shadow focus:outline-none focus:ring w-full";
   @Input() placeholder : string = "Type a message for support";
   @Output() inputOut = new EventEmitter<any>();
+  @Input() autocomplete: string = "off";
   inputVal: any;
 
 
