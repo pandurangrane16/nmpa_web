@@ -8,7 +8,7 @@ import { FooterSmallComponent } from "../../components/footers/footer-small/foot
 @Component({
   selector: "app-auth",
   templateUrl: "./auth.component.html",
-  imports:[AuthNavbarComponent,CommonModule,RouterOutlet,FooterSmallComponent]
+  imports:[CommonModule,RouterOutlet,FooterSmallComponent]
 })
 export class AuthComponent implements OnInit {
   constructor() {}

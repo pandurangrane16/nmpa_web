@@ -1,0 +1,12 @@
+<select
+  [disabled]="disabled"
+  class="w-full border border-gray-300 rounded px-3 py-2 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  [value]="value"
+  (change)="handleSelect($event)"
+>
+  <option value="" disabled selected hidden>{{ placeholder }}</option>
+
+  <option *ngFor="let opt of options" [value]="opt.value">
+    {{ opt.label }}
+  </option>
+</select>

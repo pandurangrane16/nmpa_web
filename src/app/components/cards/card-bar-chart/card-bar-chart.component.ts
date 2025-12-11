@@ -1,4 +1,11 @@
-import { Component, OnInit, AfterViewInit } from "@angular/core";
+import {
+  Component,
+  AfterViewInit,
+  Inject,
+  PLATFORM_ID
+} from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
+
 import {
   Chart,
   ChartConfiguration,
@@ -25,24 +32,19 @@ Chart.register(
   selector: "app-card-bar-chart",
   templateUrl: "./card-bar-chart.component.html",
 })
-export class CardBarChartComponent implements OnInit, AfterViewInit {
-  constructor() {}
+export class CardBarChartComponent implements AfterViewInit {
 
-  ngOnInit() {}
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
 
   ngAfterViewInit() {
+
+    // ⛔ Prevent SSR from running Chart.js
+    if (!isPlatformBrowser(this.platformId)) return;
+
     const config: ChartConfiguration<"bar"> = {
       type: "bar",
       data: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-        ],
+        labels: ["January","February","March","April","May","June","July"],
         datasets: [
           {
             label: String(new Date().getFullYear()),
@@ -62,33 +64,23 @@ export class CardBarChartComponent implements OnInit, AfterViewInit {
           },
         ],
       },
-
       options: {
         responsive: true,
         maintainAspectRatio: false,
-
         plugins: {
           legend: {
             position: "bottom",
-            labels: {
-              color: "rgba(0,0,0,.4)",
-            },
+            labels: { color: "rgba(0,0,0,.4)" },
           },
-          title: {
-            display: false,
-          },
-          tooltip: {
-            mode: "index",
-            intersect: false,
-          },
+          title: { display: false },
+          tooltip: { mode: "index", intersect: false },
         },
-
         scales: {
           x: {
             display: false,
             grid: {
               display: true,
-              tickBorderDash :[2],
+              tickBorderDash: [2],
               tickBorderDashOffset: 2,
               color: "rgba(33, 37, 41, 0.3)",
             },
@@ -96,19 +88,19 @@ export class CardBarChartComponent implements OnInit, AfterViewInit {
           y: {
             display: true,
             grid: {
-              tickBorderDash :[2],
+              tickBorderDash: [2],
               tickBorderDashOffset: 2,
               color: "rgba(33, 37, 41, 0.2)",
             },
-            ticks: {
-              color: "black",
-            },
+            ticks: { color: "black" },
           },
         },
       },
     };
 
     const canvas = document.getElementById("bar-chart") as HTMLCanvasElement;
+    if (!canvas) return;
+
     const ctx = canvas.getContext("2d");
     new Chart(ctx!, config);
   }

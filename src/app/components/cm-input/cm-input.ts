@@ -20,7 +20,7 @@ export class CmInput implements ControlValueAccessor {
 
   @Input() placeholder: string = "Full Name";
   @Input() autocomplete: string = "off";
-
+  @Input() type: string = "text";
   value: any = "";
 
   onChange = (_: any) => {};

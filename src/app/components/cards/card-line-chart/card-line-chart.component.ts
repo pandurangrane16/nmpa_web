@@ -1,4 +1,6 @@
-import { Component, OnInit, AfterViewInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit, Inject, PLATFORM_ID } from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
+
 import {
   Chart,
   ChartConfiguration,
@@ -27,24 +29,19 @@ Chart.register(
   selector: "app-card-line-chart",
   templateUrl: "./card-line-chart.component.html",
 })
-export class CardLineChartComponent implements OnInit, AfterViewInit {
-  constructor() {}
+export class CardLineChartComponent implements AfterViewInit {
 
-  ngOnInit() {}
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
 
   ngAfterViewInit() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return; // ⛔ Skip when SSR is running
+    }
+
     const config: ChartConfiguration<"line"> = {
       type: "line",
       data: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July"
-        ],
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [
           {
             label: String(new Date().getFullYear()),
@@ -62,48 +59,16 @@ export class CardLineChartComponent implements OnInit, AfterViewInit {
           },
         ],
       },
-
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            labels: {
-              color: "white",
-            },
-            position: "bottom",
-          },
-          title: {
-            display: false,
-          },
-          tooltip: {
-            mode: "index",
-            intersect: false,
-          },
-        },
-
-        scales: {
-          x: {
-            ticks: { color: "rgba(255,255,255,.7)" },
-            grid: {
-              display: false,
-            },
-          },
-          y: {
-            ticks: { color: "rgba(255,255,255,.7)" },
-            grid: {
-              color: "rgba(255, 255, 255, 0.15)",
-            },
-          },
-        },
       },
     };
 
-    const canvas = document.getElementById(
-      "line-chart"
-    ) as HTMLCanvasElement;
-    const ctx = canvas.getContext("2d");
+    const canvas = document.getElementById("line-chart") as HTMLCanvasElement;
+    if (!canvas) return;
 
+    const ctx = canvas.getContext("2d");
     new Chart(ctx!, config);
   }
 }
