@@ -21,6 +21,7 @@ import { ProfileComponent } from "./views/profile/profile.component";
 import { EditCompany } from './views/user/edit-company/edit-company';
 import { UserComponent } from './views/user/user/user.component';
 import { UserProfileComponent } from './views/user/user-profile/user-profile.component';
+import { CompanyRegisterComponent } from './views/auth/company-register/company-register.component';
 
 export const routes: Routes = [
   {
@@ -40,6 +41,7 @@ export const routes: Routes = [
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
+      { path: 'company-register', component: CompanyRegisterComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
     ],
   },

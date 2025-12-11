@@ -1,0 +1,15 @@
+<label class="inline-flex items-center cursor-pointer">
+  <input
+    type="checkbox"
+    [checked]="checked"
+    (change)="toggleCheckbox($event)"
+    class="form-checkbox border-0 text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150 rounded"
+  />
+
+  <span class="ml-2 text-sm font-semibold text-blueGray-600">
+    {{ label }}
+    <a *ngIf="linkUrl" [href]="linkUrl" class="text-red-600">
+      {{ linkLabel }}
+    </a>
+  </span>
+</label>

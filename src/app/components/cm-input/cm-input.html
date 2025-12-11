@@ -1,2 +1,7 @@
-<input type="text" [class]="class" [autocomplete]="autocomplete"
-                  [placeholder]="placeholder" (input)="SubmitData()" [(ngModel)]="inputVal"/>
+<input
+  [class]="class"
+  [placeholder]="placeholder"
+  [autocomplete]="autocomplete"
+  [value]="value"
+  (input)="updateValue($event.target.value)"
+/>

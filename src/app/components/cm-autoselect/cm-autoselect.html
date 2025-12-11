@@ -1,14 +1,13 @@
 <div class="w-full relative">
-  <!-- Search box -->
+
   <input
     type="text"
-    [(ngModel)]="searchText"
-    (input)="filterOptions()"
+    [value]="searchText"
+    (input)="searchText = $event.target.value; filterOptions(); onChange(searchText)"
     placeholder="Search state..."
     class="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
   />
 
-  <!-- Dropdown -->
   <div
     *ngIf="showDropdown"
     class="absolute z-50 w-full bg-white border rounded-lg shadow-lg mt-1 max-h-56 overflow-y-auto"
@@ -25,4 +24,5 @@
       No results found
     </div>
   </div>
+
 </div>
