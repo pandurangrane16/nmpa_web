@@ -26,6 +26,8 @@ companyForm: any;
       companyName: ['', [Validators.required, Validators.minLength(3)]],
       state: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      retypePassword: ['', [Validators.required]],
       contact: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       agree: [false, Validators.requiredTrue]
     });

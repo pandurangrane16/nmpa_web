@@ -24,6 +24,7 @@ import { UserProfileComponent } from './views/user/user-profile/user-profile.com
 import { CompanyRegisterComponent } from './views/auth/company-register/company-register.component';
 import { WorkflowMasterComponent } from './views/admin/workflow-master/workflow-master.component';
 import { WorkflowLevelComponent } from './views/admin/workflow-level/workflow-level.component';
+import { ListViewComponent } from './views/admin/company/list-view/list-view.component';
 
 export const routes: Routes = [
   {
@@ -36,6 +37,7 @@ export const routes: Routes = [
       { path: 'maps', component: MapsComponent },
       { path: 'workflow', component: WorkflowMasterComponent },
       { path: 'workflow-level', component: WorkflowLevelComponent },
+      { path: 'comp-list', component: ListViewComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },

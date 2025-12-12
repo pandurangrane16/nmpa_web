@@ -1,0 +1,64 @@
+<div class="p-4 bg-white shadow rounded-xl">
+
+  <!-- Search -->
+  <input
+    type="text"
+    class="border p-2 rounded w-full mb-3"
+    placeholder="Search..."
+    [ngModel]="searchText()"
+    (ngModelChange)="searchText.set($event); currentPage.set(1)"
+  />
+
+  <!-- Table -->
+  <table class="w-full border">
+    <thead>
+      <tr class="bg-gray-100">
+        <th
+          *ngFor="let col of columns"
+          class="p-2 border cursor-pointer"
+          (click)="sort(col.key)"
+        >
+          {{ col.title }}
+          <span *ngIf="sortedColumn() === col.key">
+            {{ sortDirection() === 'asc' ? '▲' : '▼' }}
+          </span>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let row of paginatedData()">
+        <td *ngFor="let col of columns" class="p-2 border">
+          {{ row[col.key] }}
+        </td>
+      </tr>
+
+      <!-- No data -->
+      <tr *ngIf="paginatedData().length === 0">
+        <td class="p-3 text-center text-gray-500" [attr.colspan]="columns.length">
+          No records found
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination Controls -->
+  <div class="flex justify-between items-center mt-4">
+    <button
+      class="px-3 py-1 border rounded"
+      (click)="changePage(currentPage() - 1)"
+    >
+      Prev
+    </button>
+
+    <span>Page {{ currentPage() }} of {{ totalPages() }}</span>
+
+    <button
+      class="px-3 py-1 border rounded"
+      (click)="changePage(currentPage() + 1)"
+    >
+      Next
+    </button>
+  </div>
+
+</div>
