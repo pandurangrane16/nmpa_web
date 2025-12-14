@@ -1,33 +1,44 @@
-import { Component, Input, OnInit, signal, computed } from '@angular/core';
+import { Component, Input, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from "../../app-routing.module";
+import { RouterModule } from '@angular/router';
 
 export interface TableColumn {
   key: string;
   title: string;
 }
 
+export interface TableAction {
+  label: string;
+  class?: string;                    // Tailwind classes
+  callback: (row: any) => void;       // Click handler
+  show?: (row: any) => boolean;       // Optional condition
+}
+
 @Component({
   selector: 'cm-datatable',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './cm-table.component.html'
+  imports: [CommonModule, FormsModule,RouterModule],
+  templateUrl: './cm-table.component.html',
 })
-export class CmTableComponent implements OnInit {
+export class CmTableComponent {
 
+  /* ================= Inputs ================= */
   @Input() columns: TableColumn[] = [];
   @Input() data: any[] = [];
   @Input() pageSize = 10;
 
+  @Input() actions: TableAction[] = [];
+  @Input() showActions = false;
+
+  /* ================= Signals ================= */
   searchText = signal('');
   currentPage = signal(1);
 
   sortedColumn = signal<string | null>(null);
   sortDirection = signal<'asc' | 'desc'>('asc');
 
-  ngOnInit(): void {}
-
-  // Filter Data
+  /* ================= Filtering ================= */
   filteredData = computed(() => {
     const text = this.searchText().toLowerCase();
 
@@ -38,12 +49,12 @@ export class CmTableComponent implements OnInit {
     );
   });
 
-  // Sorting
-  sort(col: string) {
-    if (this.sortedColumn() === col) {
-      this.sortDirection.update(dir => (dir === 'asc' ? 'desc' : 'asc'));
+  /* ================= Sorting ================= */
+  sort(column: string) {
+    if (this.sortedColumn() === column) {
+      this.sortDirection.update(d => d === 'asc' ? 'desc' : 'asc');
     } else {
-      this.sortedColumn.set(col);
+      this.sortedColumn.set(column);
       this.sortDirection.set('asc');
     }
   }
@@ -51,9 +62,11 @@ export class CmTableComponent implements OnInit {
   sortedData = computed(() => {
     const data = [...this.filteredData()];
     const col = this.sortedColumn();
+
     if (!col) return data;
 
     const dir = this.sortDirection();
+
     return data.sort((a, b) => {
       let x = a[col];
       let y = b[col];
@@ -61,11 +74,13 @@ export class CmTableComponent implements OnInit {
       if (typeof x === 'string') x = x.toLowerCase();
       if (typeof y === 'string') y = y.toLowerCase();
 
-      return dir === 'asc' ? (x > y ? 1 : -1) : (x < y ? 1 : -1);
+      return dir === 'asc'
+        ? x > y ? 1 : -1
+        : x < y ? 1 : -1;
     });
   });
 
-  // Pagination
+  /* ================= Pagination ================= */
   paginatedData = computed(() => {
     const start = (this.currentPage() - 1) * this.pageSize;
     return this.sortedData().slice(start, start + this.pageSize);
@@ -75,8 +90,8 @@ export class CmTableComponent implements OnInit {
     Math.ceil(this.sortedData().length / this.pageSize)
   );
 
-  changePage(p: number) {
-    if (p < 1 || p > this.totalPages()) return;
-    this.currentPage.set(p);
+  changePage(page: number) {
+    if (page < 1 || page > this.totalPages()) return;
+    this.currentPage.set(page);
   }
 }

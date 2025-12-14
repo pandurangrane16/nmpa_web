@@ -10,72 +10,96 @@
         </div>
     </div>
     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-        <form>
-            <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-                Workflow Level
-            </h6>
+        <form [formGroup]="workflowLevelForm">
+
+            <!-- WORKFLOW -->
             <div class="flex flex-wrap">
-                <div class="w-full lg:w-4/12 px-4">
-                    <div class="relative w-full mb-3">
-                        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                            Select Workflow
+                <div class="w-full lg:w-6/12 px-4">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                        Select Workflow
+                    </label>
+                    <app-cm-autoselect formControlName="workflow" (selectOut)="onSelect($event)">
+                    </app-cm-autoselect>
+                </div>
+            </div>
+
+            <hr class="my-6" />
+
+            <!-- 🔥 FORM ARRAY -->
+            <div formArrayName="levels">
+
+                <div *ngFor="let level of levels.controls; let i = index" [formGroupName]="i"
+                    class="flex flex-wrap mt-6">
+
+                    <!-- LEVEL NAME -->
+                    <div class="w-full lg:w-3/12 px-4">
+                        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                            Level Name
                         </label>
-                        <app-cm-autoselect formControlName="workflow" (selectOut)="onSelect($event)" />
+                        <app-cm-input placeholder="Level Name" formControlName="levelName">
+                        </app-cm-input>
                     </div>
-                </div>
-                <div class="w-full lg:w-4/12 px-4">
-                    <div class="relative w-full mb-3">
-                        <div class="relative w-full mb-3">
-                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                htmlFor="grid-password">
-                                Level Name
-                            </label>
-                            <app-cm-input placeholder="Level Name" formControlName="workflowName"></app-cm-input>
-                        </div>
+
+                    <!-- LEVEL NUMBER -->
+                    <div class="w-full lg:w-3/12 px-4">
+                        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                            Level Number
+                        </label>
+                        <app-cm-input placeholder="Level Number" formControlName="levelNumber">
+                        </app-cm-input>
                     </div>
-                </div>
-                <div class="w-full lg:w-4/12 px-4">
-                    <div class="relative w-full mb-3">
-                        <div class="relative w-full mb-3">
-                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                htmlFor="grid-password">
-                                Level Number
-                            </label>
-                            <app-cm-input placeholder="Level Number" formControlName="workflowName"></app-cm-input>
-                        </div>
+
+                    <!-- ROLE -->
+                    <div class="w-full lg:w-3/12 px-4">
+                        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                            Level Role
+                        </label>
+                        <app-cm-select [options]="userList" formControlName="assignedTo" placeholder="Select role">
+                        </app-cm-select>
                     </div>
-                </div>
-                <div class="w-full lg:w-6/12 px-4">
-                    <div class="relative w-full mb-3">
-                        <div class="relative w-full mb-3">
-                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                htmlFor="grid-password">
-                                Level Role
-                            </label>
-                            <app-cm-select formControlName="city" [options]="userList"
-                                placeholder="Select city"></app-cm-select>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full lg:w-6/12 px-4">
-                    <div class="relative w-full mb-3">
-                        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+
+                    <!-- FINAL -->
+                    <div class="w-full lg:w-2/12 px-4">
+                        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                             Final
                         </label>
-                        <app-cm-toggle labelVal="Final" formControlName="isFinal"></app-cm-toggle>
+                        <app-cm-toggle labelVal="Final">
+                        </app-cm-toggle>
                     </div>
+
+                    <!-- REMOVE -->
+                    <div class="w-full lg:w-1/12 px-4 flex items-end">
+                        <button *ngIf="levels.length > 1" type="button" (click)="removeLevel(i)"
+                            class="text-red-600 text-sm">
+                            Remove
+                        </button>
+                    </div>
+
                 </div>
+            </div>
+
+            <!-- ADD BUTTON -->
+            <div class="flex justify-end mt-6 px-4">
+                <button type="button" (click)="addLevels()" class="bg-blueGray-800 text-white px-6 py-3 rounded shadow">
+                    + Add
+                </button>
             </div>
 
             <hr class="mt-6 border-b-1 border-blueGray-300" />
-
-            <div class="text-center mt-6">
-                <button (click)="submitForm()" type="button"
-                    class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150">
-
+            <cm-datatable
+  [columns]="columns"
+  [data]="datatableData"
+  [pageSize]="5"
+  [showActions]="false">
+</cm-datatable>
+            <!-- SUBMIT -->
+            <div class="mt-6 px-4">
+                <button type="button" (click)="submitForm()"
+                    class="w-full bg-blueGray-800 text-white px-6 py-3 rounded shadow">
                     Submit
                 </button>
             </div>
+
         </form>
     </div>
 </div>

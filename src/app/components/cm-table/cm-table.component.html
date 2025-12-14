@@ -1,64 +1,76 @@
 <div class="p-4 bg-white shadow rounded-xl">
 
-  <!-- Search -->
-  <input
-    type="text"
-    class="border p-2 rounded w-full mb-3"
-    placeholder="Search..."
-    [ngModel]="searchText()"
-    (ngModelChange)="searchText.set($event); currentPage.set(1)"
-  />
+    <!-- Search -->
+    <input type="text" class="border p-2 rounded w-full mb-3" placeholder="Search..." [ngModel]="searchText()"
+        (ngModelChange)="searchText.set($event); currentPage.set(1)" />
 
-  <!-- Table -->
-  <table class="w-full border">
-    <thead>
-      <tr class="bg-gray-100">
-        <th
-          *ngFor="let col of columns"
-          class="p-2 border cursor-pointer"
-          (click)="sort(col.key)"
-        >
-          {{ col.title }}
-          <span *ngIf="sortedColumn() === col.key">
-            {{ sortDirection() === 'asc' ? '▲' : '▼' }}
-          </span>
-        </th>
-      </tr>
-    </thead>
+    <!-- Table -->
+    <table class="w-full border-collapse border">
+        <thead>
+            <tr class="bg-gray-100">
 
-    <tbody>
-      <tr *ngFor="let row of paginatedData()">
-        <td *ngFor="let col of columns" class="p-2 border">
-          {{ row[col.key] }}
-        </td>
-      </tr>
+                <!-- Columns -->
+                <th *ngFor="let col of columns" class="p-2 border cursor-pointer select-none" (click)="sort(col.key)">
+                    {{ col.title }}
+                    <span *ngIf="sortedColumn() === col.key">
+                        {{ sortDirection() === 'asc' ? '▲' : '▼' }}
+                    </span>
+                </th>
 
-      <!-- No data -->
-      <tr *ngIf="paginatedData().length === 0">
-        <td class="p-3 text-center text-gray-500" [attr.colspan]="columns.length">
-          No records found
-        </td>
-      </tr>
-    </tbody>
-  </table>
+                <!-- Actions Header -->
+                <th *ngIf="showActions" class="p-2 border">
+                    Actions
+                </th>
+            </tr>
+        </thead>
 
-  <!-- Pagination Controls -->
-  <div class="flex justify-between items-center mt-4">
-    <button
-      class="px-3 py-1 border rounded"
-      (click)="changePage(currentPage() - 1)"
-    >
-      Prev
-    </button>
+        <tbody>
+            <!-- Rows -->
+            <tr *ngFor="let row of paginatedData()">
 
-    <span>Page {{ currentPage() }} of {{ totalPages() }}</span>
+                <td *ngFor="let col of columns" class="p-2 border">
+                    {{ row[col.key] }}
+                </td>
 
-    <button
-      class="px-3 py-1 border rounded"
-      (click)="changePage(currentPage() + 1)"
-    >
-      Next
-    </button>
-  </div>
+                <!-- Actions -->
+                <td *ngIf="showActions" class="p-2 border">
+                    <div class="flex flex-wrap gap-x-3 gap-y-2">
+                        <ng-container *ngFor="let action of actions">
+                            <button *ngIf="!action.show || action.show(row)" type="button"
+                                class="px-3 py-1 text-sm rounded" [ngClass]="action.class"
+                                (click)="action.callback(row)">
+                                {{ action.label }}
+                            </button>
+                        </ng-container>
+                    </div>
+                </td>
+
+            </tr>
+
+            <!-- No data -->
+            <tr *ngIf="paginatedData().length === 0">
+                <td class="p-3 text-center text-gray-500" [attr.colspan]="columns.length + (showActions ? 1 : 0)">
+                    No records found
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="flex justify-between items-center mt-4">
+        <button type="button" class="px-3 py-1 border rounded disabled:opacity-50" (click)="changePage(currentPage() - 1)"
+            [disabled]="currentPage() === 1">
+            Prev
+        </button>
+
+        <span>
+            Page {{ currentPage() }} of {{ totalPages() }}
+        </span>
+
+        <button type="button" class="px-3 py-1 border rounded disabled:opacity-50" (click)="changePage(currentPage() + 1)"
+            [disabled]="currentPage() === totalPages()">
+            Next
+        </button>
+    </div>
 
 </div>
