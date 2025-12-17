@@ -1,4 +1,4 @@
-import { Component, Input, signal, computed } from '@angular/core';
+import { Component, Input, signal, computed, OnInit, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from "../../app-routing.module";
@@ -18,16 +18,17 @@ export interface TableAction {
 
 @Component({
   selector: 'cm-datatable',
-  imports: [CommonModule, FormsModule,RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './cm-table.component.html',
+  standalone : true
 })
-export class CmTableComponent {
+export class CmTableComponent implements OnInit {
 
   /* ================= Inputs ================= */
   @Input() columns: TableColumn[] = [];
-  @Input() data: any[] = [];
+  //@Input() data: any[] = [];
   @Input() pageSize = 10;
-
+  @Input() enableSearch = true;
   @Input() actions: TableAction[] = [];
   @Input() showActions = false;
 
@@ -37,17 +38,24 @@ export class CmTableComponent {
 
   sortedColumn = signal<string | null>(null);
   sortDirection = signal<'asc' | 'desc'>('asc');
+  data = input<any[]>([]);
+
+  ngOnInit(): void {
+    console.log(this.data);
+  }
+
 
   /* ================= Filtering ================= */
-  filteredData = computed(() => {
-    const text = this.searchText().toLowerCase();
+ filteredData = computed(() => {
+  const text = this.searchText().toLowerCase();
+  const rows = this.data(); // 👈 signal read
 
-    return this.data.filter(row =>
-      Object.values(row).some(val =>
-        String(val).toLowerCase().includes(text)
-      )
-    );
-  });
+  return rows.filter(row =>
+    Object.values(row).some(val =>
+      String(val).toLowerCase().includes(text)
+    )
+  );
+});
 
   /* ================= Sorting ================= */
   sort(column: string) {
@@ -94,4 +102,6 @@ export class CmTableComponent {
     if (page < 1 || page > this.totalPages()) return;
     this.currentPage.set(page);
   }
+
+  
 }

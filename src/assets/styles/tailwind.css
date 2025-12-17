@@ -4279,3 +4279,72 @@ select {
   top: 0;
   transform: none;
 }
+
+.btn-style3 {
+  border-color: #979695;
+  color: white;
+  height: 40px;
+  font-size: small;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;     /* vertical center */
+  justify-content: center; /* horizontal center */
+}
+
+.btn-style3:hover {
+  transform: translateY(-0.25em);
+  box-shadow: 0 0 0.5em 0em #5e5e5e;
+  border-color: #5e5e5e;
+  color: white;
+}
+
+.btn-style700 {
+  position: relative;
+  color: #979695;
+  background: transparent;
+}
+
+/* pseudo borders */
+.btn-style700::before,
+.btn-style700::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-color: #dd6395;
+  border-radius: inherit;
+  border-style: solid;
+  transition: all 0.35s;
+  content: "";
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* horizontal borders */
+.btn-style700::before {
+  width: 0;
+  height: 100%;
+  border-width: 1px 0 1px 0;
+}
+
+/* vertical borders */
+.btn-style700::after {
+  width: 100%;
+  height: 0;
+}
+
+/* hover */
+.btn-style700:hover {
+  border-color: black;
+  color: black;
+}
+
+.btn-style700:hover::before {
+  width: 100%;
+}
+
+.btn-style700:hover::after {
+  height: 100%;
+}
+
+

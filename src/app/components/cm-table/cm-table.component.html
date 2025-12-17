@@ -1,9 +1,10 @@
 <div class="p-4 bg-white shadow rounded-xl">
 
     <!-- Search -->
+    @if(enableSearch){
     <input type="text" class="border p-2 rounded w-full mb-3" placeholder="Search..." [ngModel]="searchText()"
         (ngModelChange)="searchText.set($event); currentPage.set(1)" />
-
+    }
     <!-- Table -->
     <table class="w-full border-collapse border">
         <thead>
@@ -58,8 +59,8 @@
 
     <!-- Pagination -->
     <div class="flex justify-between items-center mt-4">
-        <button type="button" class="px-3 py-1 border rounded disabled:opacity-50" (click)="changePage(currentPage() - 1)"
-            [disabled]="currentPage() === 1">
+        <button type="button" class="px-3 py-1 border rounded disabled:opacity-50"
+            (click)="changePage(currentPage() - 1)" [disabled]="currentPage() === 1">
             Prev
         </button>
 
@@ -67,8 +68,8 @@
             Page {{ currentPage() }} of {{ totalPages() }}
         </span>
 
-        <button type="button" class="px-3 py-1 border rounded disabled:opacity-50" (click)="changePage(currentPage() + 1)"
-            [disabled]="currentPage() === totalPages()">
+        <button type="button" class="px-3 py-1 border rounded disabled:opacity-50"
+            (click)="changePage(currentPage() + 1)" [disabled]="currentPage() === totalPages()">
             Next
         </button>
     </div>

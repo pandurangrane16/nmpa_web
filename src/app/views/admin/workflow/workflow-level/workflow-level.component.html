@@ -3,13 +3,13 @@
         <div class="text-center flex justify-between">
             <h6 class="text-blueGray-700 text-xl font-bold">Workflow Level</h6>
             <button
-                class="bg-blueGray-700 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                class="click-btn btn-style3 bg-blueGray-700 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                 type="button">
                 Back To List
             </button>
         </div>
     </div>
-    <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+    <div class="flex-auto px-4 lg:px-10 py-10 pt-0 mt-6">
         <form [formGroup]="workflowLevelForm">
 
             <!-- WORKFLOW -->
@@ -59,13 +59,13 @@
                     </div>
 
                     <!-- FINAL -->
-                    <div class="w-full lg:w-2/12 px-4">
+                    <!-- <div class="w-full lg:w-2/12 px-4 mt-6">
                         <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                            Final
+                            Final {{isWorkflowSelected}}
                         </label>
-                        <app-cm-toggle labelVal="Final">
+                        <app-cm-toggle [isDisabled]="isWorkflowSelected" formControlName="isFinal" labelVal="Final">
                         </app-cm-toggle>
-                    </div>
+                    </div> -->
 
                     <!-- REMOVE -->
                     <div class="w-full lg:w-1/12 px-4 flex items-end">
@@ -80,24 +80,27 @@
 
             <!-- ADD BUTTON -->
             <div class="flex justify-end mt-6 px-4">
-                <button type="button" (click)="addLevels()" class="bg-blueGray-800 text-white px-6 py-3 rounded shadow">
+                <button type="button" (click)="addLevels()" class="bg-blueGray-800 text-white px-6 py-3 rounded shadow click-btn btn-style3">
                     + Add
                 </button>
             </div>
 
             <hr class="mt-6 border-b-1 border-blueGray-300" />
-            <cm-datatable
-  [columns]="columns"
-  [data]="datatableData"
-  [pageSize]="5"
-  [showActions]="false">
-</cm-datatable>
+            @if (datatableData.length > 0){
+            <cm-datatable [columns]="columns" [enableSearch]="false" [data]="datatableData" [pageSize]="5"
+                [showActions]="false">
+            </cm-datatable>
+            }
             <!-- SUBMIT -->
-            <div class="mt-6 px-4">
-                <button type="button" (click)="submitForm()"
-                    class="w-full bg-blueGray-800 text-white px-6 py-3 rounded shadow">
+            <div class="w-full mt-6 px-4">
+                <app-cm-button type="submit" btnText="Submit"
+                    (click)="submitForm()">
                     Submit
-                </button>
+                    </app-cm-button>
+                <!-- <button type="button" (click)="submitForm()"
+                    class="">
+                    Submit
+                </button> -->
             </div>
 
         </form>

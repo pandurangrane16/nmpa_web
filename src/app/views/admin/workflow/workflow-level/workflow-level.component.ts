@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { CmInput } from '../../../components/cm-input/cm-input';
-import { CmToggle } from '../../../components/cm-toggle/cm-toggle';
-import { CmAutoselect } from '../../../components/cm-autoselect/cm-autoselect';
-import { CmSelectComponent } from '../../../components/cm-select/cm-select.component';
-import { CmTableComponent } from '../../../components/cm-table/cm-table.component';
+import { CmInput } from '../../../../components/cm-input/cm-input';
+import { CmToggle } from '../../../../components/cm-toggle/cm-toggle';
+import { CmAutoselect } from '../../../../components/cm-autoselect/cm-autoselect';
+import { CmSelectComponent } from '../../../../components/cm-select/cm-select.component';
+import { CmTableComponent } from '../../../../components/cm-table/cm-table.component';
+import { CmButton } from "../../../../components/cm-button/cm-button";
 
 @Component({
   selector: 'app-workflow-level',
@@ -16,17 +17,18 @@ import { CmTableComponent } from '../../../components/cm-table/cm-table.componen
     FormsModule,
     ReactiveFormsModule,
     CmInput,
-    CmToggle,
     CmAutoselect,
     CmSelectComponent,
-    CmTableComponent
-  ],
+    CmTableComponent,
+    CmButton
+],
   templateUrl: './workflow-level.component.html',
   styleUrl: './workflow-level.component.css',
 })
 export class WorkflowLevelComponent implements OnInit {
 
   workflowLevelForm!: FormGroup;
+  isWorkflowSelected : boolean = true;
 
   /** 🔹 Role dropdown */
   userList = [
@@ -41,8 +43,7 @@ export class WorkflowLevelComponent implements OnInit {
     { key: 'workflow', title: 'Workflow' },
     { key: 'levelName', title: 'Level Name' },
     { key: 'levelNumber', title: 'Level Number' },
-    { key: 'assignedTo', title: 'Role' },
-    { key: 'isFinal', title: 'Final' }
+    { key: 'assignedTo', title: 'Role' }
   ];
 
   /** 🔹 Data shown in cm-datatable */
@@ -62,8 +63,7 @@ export class WorkflowLevelComponent implements OnInit {
     return this.fb.group({
       levelName: ['', Validators.required],
       levelNumber: ['', Validators.required],
-      assignedTo: ['', Validators.required],
-      isFinal: [false]
+      assignedTo: ['', Validators.required]
     });
   }
 

@@ -22,8 +22,8 @@ import { EditCompany } from './views/user/edit-company/edit-company';
 import { UserComponent } from './views/user/user/user.component';
 import { UserProfileComponent } from './views/user/user-profile/user-profile.component';
 import { CompanyRegisterComponent } from './views/auth/company-register/company-register.component';
-import { WorkflowMasterComponent } from './views/admin/workflow-master/workflow-master.component';
-import { WorkflowLevelComponent } from './views/admin/workflow-level/workflow-level.component';
+import { WorkflowMasterComponent } from './views/admin/workflow/workflow-master/workflow-master.component';
+import { WorkflowLevelComponent } from './views/admin/workflow/workflow-level/workflow-level.component';
 import { ListViewComponent } from './views/admin/company/list-view/list-view.component';
 
 export const routes: Routes = [
