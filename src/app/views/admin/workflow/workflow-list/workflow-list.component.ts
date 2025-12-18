@@ -1,11 +1,70 @@
 import { Component } from '@angular/core';
+import { CmTableComponent } from '../../../../components/cm-table/cm-table.component';
+import { CmButton } from '../../../../components/cm-button/cm-button';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workflow-list',
-  imports: [],
+  imports: [CmTableComponent,CmButton],
   templateUrl: './workflow-list.component.html',
   styleUrl: './workflow-list.component.css',
 })
 export class WorkflowListComponent {
+  constructor(private router: Router) {}
+columns = [
+  { key: 'id', title: 'Company ID' },
+  { key: 'name', title: 'Company Name' },
+  { key: 'email', title: 'Email' },
+];
 
+  userList = [
+    { id: 1, name: 'John', email: 'john@gmail.com' },
+    { id: 2, name: 'Smith', email: 'smith@yahoo.com' },
+    { id: 3, name: 'Alice', email: 'alice@outlook.com' },
+    { id: 1, name: 'John', email: 'john@gmail.com' },
+    { id: 2, name: 'Smith', email: 'smith@yahoo.com' },
+    { id: 3, name: 'Alice', email: 'alice@outlook.com' },
+    { id: 1, name: 'John', email: 'john@gmail.com' },
+    { id: 2, name: 'Smith', email: 'smith@yahoo.com' },
+    { id: 3, name: 'Alice', email: 'alice@outlook.com' },
+    { id: 1, name: 'John', email: 'john@gmail.com' },
+    { id: 2, name: 'Smith', email: 'smith@yahoo.com' },
+    { id: 3, name: 'Alice', email: 'alice@outlook.com' },
+    { id: 1, name: 'John', email: 'john@gmail.com' },
+    { id: 2, name: 'Smith', email: 'smith@yahoo.com' },
+    { id: 3, name: 'Alice', email: 'alice@outlook.com' },
+    { id: 1, name: 'John', email: 'john@gmail.com' },
+    { id: 2, name: 'Smith', email: 'smith@yahoo.com' },
+    { id: 3, name: 'Alice', email: 'alice@outlook.com' },
+    { id: 1, name: 'John', email: 'john@gmail.com' },
+    { id: 2, name: 'Smith', email: 'smith@yahoo.com' },
+    { id: 3, name: 'Alice', email: 'alice@outlook.com' },
+    { id: 1, name: 'John', email: 'john@gmail.com' },
+    { id: 2, name: 'Smith', email: 'smith@yahoo.com' },
+    { id: 3, name: 'Alice', email: 'alice@outlook.com' },
+];
+
+
+actions = [
+  {
+    label: 'View',
+    class: 'bg-green-500 text-white',
+    callback: (row: any) => console.log('View', row)
+  },
+  {
+    label: 'Edit',
+    class: 'bg-yellow-500 text-black',
+    callback: (row: any) => console.log('Edit', row)
+  },
+  {
+    label: 'Delete',
+    class: 'bg-red-500 text-white',
+    callback: (row: any) => console.log('Delete', row),
+    //show: (row: { isDeletable: any; }) => row.isDeletable
+  }
+];
+
+CreateWorkflow(){
+this.router.navigate(['admin/workflow-master']);
+}
 }

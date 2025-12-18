@@ -25,6 +25,7 @@ import { CompanyRegisterComponent } from './views/auth/company-register/company-
 import { WorkflowMasterComponent } from './views/admin/workflow/workflow-master/workflow-master.component';
 import { WorkflowLevelComponent } from './views/admin/workflow/workflow-level/workflow-level.component';
 import { ListViewComponent } from './views/admin/company/list-view/list-view.component';
+import { WorkflowListComponent } from './views/admin/workflow/workflow-list/workflow-list.component';
 
 export const routes: Routes = [
   {
@@ -35,7 +36,8 @@ export const routes: Routes = [
       { path: 'settings', component: SettingsComponent },
       { path: 'tables', component: TablesComponent },
       { path: 'maps', component: MapsComponent },
-      { path: 'workflow', component: WorkflowMasterComponent },
+      { path: 'workflow', component: WorkflowListComponent },
+      { path: 'workflow-master', component: WorkflowMasterComponent },
       { path: 'workflow-level', component: WorkflowLevelComponent },
       { path: 'comp-list', component: ListViewComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
