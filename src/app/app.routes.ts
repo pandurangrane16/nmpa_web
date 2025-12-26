@@ -26,6 +26,8 @@ import { WorkflowMasterComponent } from './views/admin/workflow/workflow-master/
 import { WorkflowLevelComponent } from './views/admin/workflow/workflow-level/workflow-level.component';
 import { ListViewComponent } from './views/admin/company/list-view/list-view.component';
 import { WorkflowListComponent } from './views/admin/workflow/workflow-list/workflow-list.component';
+import { RoleListComponent } from './views/admin/role/role-list/role-list.component';
+import { RoleMasterComponent } from './views/admin/role/role-master/role-master.component';
 
 export const routes: Routes = [
   {
@@ -37,6 +39,8 @@ export const routes: Routes = [
       { path: 'tables', component: TablesComponent },
       { path: 'maps', component: MapsComponent },
       { path: 'workflow', component: WorkflowListComponent },
+      { path: 'role-list', component: RoleListComponent },
+      { path: 'role-config', component: RoleMasterComponent },
       { path: 'workflow-master', component: WorkflowMasterComponent },
       { path: 'workflow-level', component: WorkflowLevelComponent },
       { path: 'comp-list', component: ListViewComponent },
@@ -54,14 +58,14 @@ export const routes: Routes = [
     ],
   },
   {
-      path: "user",
-      component: UserComponent,
-      children: [
-        { path: "user-profile", component: UserProfileComponent },
-        { path: "", component: UserProfileComponent },
-        { path: "", redirectTo: "user-profile", pathMatch: "full" },
-      ]
-    },
+    path: "user",
+    component: UserComponent,
+    children: [
+      { path: "user-profile", component: UserProfileComponent },
+      { path: "", component: UserProfileComponent },
+      { path: "", redirectTo: "user-profile", pathMatch: "full" },
+    ]
+  },
   { path: 'profile', component: ProfileComponent },
   { path: 'edit-profile', component: EditCompany },
   { path: 'landing', component: LandingComponent },

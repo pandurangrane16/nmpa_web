@@ -19,7 +19,8 @@ export class LandingComponent implements OnInit {
   fullName: string = "";
   description: string = "";
   constructor(private router: Router) { }
-  companyStatus: 'APPROVED' | 'PENDING AT MARINE' | 'REJECTED' = 'PENDING AT MARINE';
+  companyStatus: 'APPROVED' | 'PENDING' | 'REJECTED' = 'APPROVED';
+  statusDesc: string = " - Company Details Pending"
   ngOnInit(): void { }
 
   getInputData(evt: any) {
