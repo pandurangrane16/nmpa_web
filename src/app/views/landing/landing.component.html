@@ -13,6 +13,23 @@
             <h1 class="text-white font-semibold text-5xl hover-underline">
               4521 - CMS COMPUTERS LIMITED.
             </h1>
+            <!-- Company Status Badge -->
+            <div class="mt-3 flex flex-col items-center">
+              <div class="inline-flex items-center px-4 py-2 rounded-full shadow-lg" [ngClass]="{
+                  'bg-emerald-500': companyStatus === 'APPROVED',
+                  'bg-yellow-500': companyStatus === 'PENDING AT MARINE',
+                  'bg-red-500': companyStatus === 'REJECTED'
+                }">
+                <i class="mr-2" [ngClass]="{
+                    'fas fa-check-circle': companyStatus === 'APPROVED',
+                    'fas fa-clock': companyStatus === 'PENDING AT MARINE',
+                    'fas fa-times-circle': companyStatus === 'REJECTED'
+                  }"></i>
+                <span class="text-white font-semibold text-sm uppercase tracking-wide">
+                  Status: {{ companyStatus }}
+                </span>
+              </div>
+            </div>
             <p class="mt-4 text-lg text-blueGray-200">
               Email : shivaram_shetty@cms.co.in
             </p>
@@ -182,7 +199,7 @@
               </div>
               @if(fullName != "" && description != "") {
               <div class="text-center mt-6">
-                <app-cm-button></app-cm-button>
+                <app-cm-button btnText="Submit Request"></app-cm-button>
               </div>
               }
             </div>

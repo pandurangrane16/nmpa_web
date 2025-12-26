@@ -4348,4 +4348,12 @@ select {
   height: 100%;
 }
 
+.modal {
+  display: block !important;
+  z-index: 1055;
+}
+
+.modal-backdrop {
+  z-index: 1050;
+}
 

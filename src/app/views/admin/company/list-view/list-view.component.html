@@ -27,4 +27,8 @@
             </cm-datatable>
         </form>
     </div>
+
+    <app-mdl-company-view *ngIf="open" [open]="open" actionType="view"
+        (closeForm)="closeDrawer()">
+    </app-mdl-company-view>
 </div>

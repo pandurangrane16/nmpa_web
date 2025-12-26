@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from "@angular/core";
 import { FooterComponent } from "../../components/footers/footer/footer.component";
 import { CommonModule } from "@angular/common";
-import {FormsModule} from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 import { AuthNavbarComponent } from "../../components/navbars/auth-navbar/auth-navbar.component";
 import { CardTableComponent } from "../../components/cards/card-table/card-table.component";
 import { CmButton } from "../../components/cm-button/cm-button";
@@ -13,34 +13,34 @@ import { Router } from "@angular/router";
   selector: "app-landing",
   templateUrl: "./landing.component.html",
   imports: [FooterComponent, CommonModule, AuthNavbarComponent, CardTableComponent, CmButton, FormsModule, CmTextarea, CmInput],
-  standalone:true
+  standalone: true
 })
 export class LandingComponent implements OnInit {
-  fullName : string ="";
-  description:string = "";
-  constructor(private router : Router) {}
+  fullName: string = "";
+  description: string = "";
+  constructor(private router: Router) { }
+  companyStatus: 'APPROVED' | 'PENDING AT MARINE' | 'REJECTED' = 'PENDING AT MARINE';
+  ngOnInit(): void { }
 
-  ngOnInit(): void {}
-
-  getInputData(evt :any){
+  getInputData(evt: any) {
     this.fullName = evt;
   }
-  getTextAreaData(evt :any){
+  getTextAreaData(evt: any) {
     this.description = evt;
   }
 
-  
-  OpenShortCut(type:any){
-    if(type === 'company'){
+
+  OpenShortCut(type: any) {
+    if (type === 'company') {
       this.router.navigate(['/profile']);
     }
-    else if(type === 'pass'){
+    else if (type === 'pass') {
       //window.location.href = '/vehicle';
     }
-    else if(type === 'rfid'){
+    else if (type === 'rfid') {
       //window.location.href = '/view-rfid';
     }
-    else if(type === 'reports'){
+    else if (type === 'reports') {
       //window.location.href = '/rfid-pass-details';
     }
   }

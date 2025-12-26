@@ -1,83 +1,63 @@
-import { Component, inject } from '@angular/core';
-import { CmTableComponent } from "../../../../components/cm-table/cm-table.component";
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { MdlViewCompany } from '../mdl-view-company/mdl-view-company';
+import { Component } from '@angular/core';
+import { CmTableComponent } from '../../../../components/cm-table/cm-table.component';
+import { MdlCompanyViewComponent } from '../mdl-company-view/mdl-company-view.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-list-view',
-  imports: [CmTableComponent],
+  standalone: true,
+  imports: [CmTableComponent, MdlCompanyViewComponent,CommonModule],
   templateUrl: './list-view.component.html',
   styleUrl: './list-view.component.css',
 })
 export class ListViewComponent {
-  modalService = inject(NgbModal);
+
+  open = false; // ✅ boolean
+  actionType: 'view' | 'edit' | 'delete' = 'view';
+  selectedRow: any;
+
   columns = [
-  { key: 'id', title: 'Company ID' },
-  { key: 'name', title: 'Company Name' },
-  { key: 'email', title: 'Email' },
-];
+    { key: 'id', title: 'Company ID' },
+    { key: 'name', title: 'Company Name' },
+    { key: 'email', title: 'Email' },
+  ];
 
   userList = [
     { id: 1, name: 'John', email: 'john@gmail.com' },
     { id: 2, name: 'Smith', email: 'smith@yahoo.com' },
     { id: 3, name: 'Alice', email: 'alice@outlook.com' },
-    { id: 1, name: 'John', email: 'john@gmail.com' },
-    { id: 2, name: 'Smith', email: 'smith@yahoo.com' },
-    { id: 3, name: 'Alice', email: 'alice@outlook.com' },
-    { id: 1, name: 'John', email: 'john@gmail.com' },
-    { id: 2, name: 'Smith', email: 'smith@yahoo.com' },
-    { id: 3, name: 'Alice', email: 'alice@outlook.com' },
-    { id: 1, name: 'John', email: 'john@gmail.com' },
-    { id: 2, name: 'Smith', email: 'smith@yahoo.com' },
-    { id: 3, name: 'Alice', email: 'alice@outlook.com' },
-    { id: 1, name: 'John', email: 'john@gmail.com' },
-    { id: 2, name: 'Smith', email: 'smith@yahoo.com' },
-    { id: 3, name: 'Alice', email: 'alice@outlook.com' },
-    { id: 1, name: 'John', email: 'john@gmail.com' },
-    { id: 2, name: 'Smith', email: 'smith@yahoo.com' },
-    { id: 3, name: 'Alice', email: 'alice@outlook.com' },
-    { id: 1, name: 'John', email: 'john@gmail.com' },
-    { id: 2, name: 'Smith', email: 'smith@yahoo.com' },
-    { id: 3, name: 'Alice', email: 'alice@outlook.com' },
-    { id: 1, name: 'John', email: 'john@gmail.com' },
-    { id: 2, name: 'Smith', email: 'smith@yahoo.com' },
-    { id: 3, name: 'Alice', email: 'alice@outlook.com' },
-];
+    // …
+  ];
 
+  actions = [
+    {
+      label: 'View',
+      class: 'bg-black text-white',
+      callback: (row: any) => this.tableClick(row, 'view')
+    },
+    // {
+    //   label: 'Edit',
+    //   class: 'bg-yellow-500 text-black',
+    //   callback: (row: any) => this.tableClick(row, 'edit')
+    // },
+    // {
+    //   label: 'Delete',
+    //   class: 'bg-red-500 text-white',
+    //   callback: (row: any) => this.tableClick(row, 'delete')
+    // }
+  ];
 
-actions = [
-  {
-    label: 'View',
-    class: 'bg-green-500 text-black',
-    callback: (row: any) => {(this.tableClick(row,'view'))}
-  },
-  {
-    label: 'Edit',
-    class: 'bg-yellow-500 text-black',
-    callback: (row: any) => {(this.tableClick(row,'edit'))}
-  },
-  {
-    label: 'Delete',
-    class: 'bg-red-500 text-white',
-    callback: (row: any) => {(this.tableClick(row,'delete'))}
-    //show: (row: { isDeletable: any; }) => row.isDeletable
-  }
-];
-
-openModal() {
-    this.modalService.open(MdlViewCompany, {
-      centered: true,
-      backdrop: 'static',
-      size: 'lg'
-    });
+  tableClick(row: any, type: 'view' | 'edit' | 'delete') {
+    this.selectedRow = row;   // ✅ store row
+    this.actionType = type;   // ✅ store action
+    this.openDrawer();
   }
 
-tableClick(event: any,type:string) {
-  this.modalService.open(MdlViewCompany, {
-      centered: true,
-      backdrop: 'static',
-      size: 'lg'
-    });
-}
+  openDrawer() {
+    this.open = true;
+  }
 
+  closeDrawer() {
+    this.open = false;
+  }
 }

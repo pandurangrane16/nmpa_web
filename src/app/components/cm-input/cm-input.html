@@ -4,5 +4,6 @@
   [autocomplete]="autocomplete"
   [value]="value"
   [type]="type"
-  (input)="updateValue($event.target.value)"
+  (input)="updateValue($event.target.value)",
+  [readonly]="readOnly"
 />
