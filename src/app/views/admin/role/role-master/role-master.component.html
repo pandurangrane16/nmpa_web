@@ -11,49 +11,161 @@
     </div>
     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
         <form>
-            <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-                Role Configuration
-            </h6>
-            <div class="flex flex-wrap">
-                <div class="w-full lg:w-6/12 px-4">
-                    <div class="relative w-full mb-3">
-                        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                            Role Name
-                        </label>
-                        <app-cm-input placeholder="Role Name" formControlName="roleName"></app-cm-input>
+            <div class="max-w-5xl mx-auto bg-blueGray-50 p-8 rounded-xl shadow-lg">
+
+                <!-- HEADER -->
+                <h2 class="text-2xl font-bold text-blueGray-700 mb-10 text-center">
+                    Role Creation Wizard
+                </h2>
+
+                <!-- STEPPER -->
+                <div class="relative flex items-center justify-between mb-16">
+
+                    <!-- PROGRESS BAR -->
+                    <div class="absolute top-5 left-0 w-full h-1 bg-gray-200 rounded">
+                        <div class="h-1 rounded bg-gradient-to-r from-blue-500 to-indigo-600 transition-all duration-500"
+                            [style.width.%]="(currentStep - 1) * 50">
+                        </div>
+                    </div>
+
+                    <!-- STEP 1 -->
+                    <div class="relative z-10 flex flex-col items-center cursor-pointer" (click)="goTo(1)">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold shadow-md transition"
+                            [ngClass]="currentStep >= 1
+          ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white'
+          : 'bg-white text-gray-400 border'">
+                            🧑
+                        </div>
+                        <span class="mt-3 text-sm font-semibold">Role Info</span>
+                    </div>
+
+                    <!-- STEP 2 -->
+                    <div class="relative z-10 flex flex-col items-center cursor-pointer" (click)="goTo(2)">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold shadow-md transition"
+                            [ngClass]="currentStep >= 2
+          ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white'
+          : 'bg-white text-gray-400 border'">
+                            📋
+                        </div>
+                        <span class="mt-3 text-sm font-semibold">Menu Access</span>
+                    </div>
+
+                    <!-- STEP 3 -->
+                    <div class="relative z-10 flex flex-col items-center cursor-pointer" (click)="goTo(3)">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold shadow-md transition"
+                            [ngClass]="currentStep === 3
+          ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white'
+          : 'bg-white text-gray-400 border'">
+                            ✅
+                        </div>
+                        <span class="mt-3 text-sm font-semibold">Review</span>
                     </div>
                 </div>
-                <div class="w-full lg:w-6/12 px-4">
-                    <div class="relative w-full mb-3">
-                        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                            Description
-                        </label>
-                        <app-cm-textarea placeholder="Description" formControlName="description"></app-cm-textarea>
-                    </div>
-                </div>
-                <div class="w-full lg:w-6/12 px-4">
-                    <div class="relative w-full mb-3">
-                        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                            Active
-                        </label>
-                        <app-cm-toggle labelVal="Active" formControlName="isActive"></app-cm-toggle>
-                    </div>
-                </div>
-            </div>
 
-            <hr class="mt-6 border-b-1 border-blueGray-300" />
+                <!-- CONTENT CARD -->
+                <div class="bg-white rounded-xl shadow p-8 transition-all duration-300">
 
-            <div class="text-center mt-6">
-                <div class="w-full mt-6 px-4">
-                    <app-cm-button type="submit" btnText="Create Role" (click)="submitForm()">
+                    <!-- STEP 1 -->
+                    <div *ngIf="currentStep === 1" class="animate-fade">
+                        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                            Role Configuration
+                        </h6>
+                        <div class="flex flex-wrap">
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password">
+                                        Role Name
+                                    </label>
+                                    <app-cm-input placeholder="Role Name" formControlName="roleName"></app-cm-input>
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password">
+                                        Description
+                                    </label>
+                                    <app-cm-textarea placeholder="Description"
+                                        formControlName="description"></app-cm-textarea>
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password">
+                                        Active
+                                    </label>
+                                    <app-cm-toggle labelVal="Active" formControlName="isActive"></app-cm-toggle>
+                                </div>
+                            </div>
+                        </div>
 
-                    </app-cm-button>
-                    <!-- <button type="button" (click)="submitForm()"
+                        <hr class="mt-6 border-b-1 border-blueGray-300" />
+
+                        <div class="text-center mt-6">
+                            <div class="w-full mt-6 px-4">
+                                <app-cm-button type="submit" btnText="Create Role" (click)="submitForm()">
+
+                                </app-cm-button>
+                                <!-- <button type="button" (click)="submitForm()"
                     class="">
                     Submit
                 </button> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2 -->
+                    <div *ngIf="currentStep === 2" class="animate-fade">
+                        <h3 class="text-lg font-semibold mb-4">Menu Permissions</h3>
+
+                        <div class="space-y-4">
+                            <label class="flex items-center space-x-3">
+                                <input type="checkbox" class="w-5 h-5">
+                                <span>Dashboard</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="checkbox" class="w-5 h-5">
+                                <span>User Management</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="checkbox" class="w-5 h-5">
+                                <span>Reports</span>
+                            </label>
+                        </div>
+
+                        <div class="flex justify-between mt-8">
+                            <button class="bg-gray-300 text-gray-700 px-8 py-2 rounded-lg"
+                                (click)="prev()">Back</button>
+                            <button
+                                class="bg-indigo-600 text-white px-8 py-2 rounded-lg shadow hover:scale-105 transition"
+                                (click)="next()">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3 -->
+                    <div *ngIf="currentStep === 3" class="animate-fade">
+                        <h3 class="text-lg font-semibold mb-4">Review & Submit</h3>
+
+                        <div class="bg-blueGray-50 p-4 rounded mb-6">
+                            <p><b>Role:</b> Admin</p>
+                            <p><b>Menus:</b> Dashboard, Users</p>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <button class="bg-gray-300 text-gray-700 px-8 py-2 rounded-lg"
+                                (click)="prev()">Back</button>
+                            <button
+                                class="bg-green-600 text-white px-8 py-2 rounded-lg shadow hover:scale-105 transition">
+                                Create Role
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+
         </form>
     </div>
 </div>
