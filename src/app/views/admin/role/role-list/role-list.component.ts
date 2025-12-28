@@ -4,10 +4,11 @@ import { MdlCompanyViewComponent } from '../../company/mdl-company-view/mdl-comp
 import { CommonModule } from '@angular/common';
 import { CmButton } from '../../../../components/cm-button/cm-button';
 import { Router } from '@angular/router';
+import { MdlViewRoleComponent } from '../mdl-view-role/mdl-view-role.component';
 
 @Component({
   selector: 'app-role-list',
-  imports: [CmTableComponent, MdlCompanyViewComponent, CommonModule, CmButton],
+  imports: [CmTableComponent, MdlViewRoleComponent, CommonModule, CmButton],
   templateUrl: './role-list.component.html',
   styleUrl: './role-list.component.css',
 })

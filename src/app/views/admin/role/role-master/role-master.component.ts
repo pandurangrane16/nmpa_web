@@ -19,6 +19,6 @@ export class RoleMasterComponent {
   }
 
   backToList() {
-    this.router.navigate(['admin/role-config']);
+    this.router.navigate(['admin/role-list']);
   }
 }

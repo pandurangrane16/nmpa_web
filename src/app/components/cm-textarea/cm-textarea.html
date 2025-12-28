@@ -1,2 +1,2 @@
-<textarea rows="4" cols="80" [class]="class" [autocomplete]="autocomplete"
-    [placeholder]="placeholder" (input)="SubmitData()" [(ngModel)]="inputVal"></textarea>
+<textarea [rows]="rows" [cols]="cols" [class]="class" [autocomplete]="autocomplete" [placeholder]="placeholder"
+    [value]="value" [readonly]="readOnly" (input)="updateValue($event.target)"></textarea>
