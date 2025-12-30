@@ -25,7 +25,11 @@
             </cm-datatable>
         </form>
     </div>
-
-    <app-mdl-view-role *ngIf="open" [open]="open" actionType="view" (closeForm)="closeDrawer()">
+    @if(actionType == "view" || actionType == "edit"){
+    <app-mdl-view-role [actionType]="actionType" *ngIf="open" [open]="open" (closeForm)="closeDrawer()">
     </app-mdl-view-role>
+    } @else {
+    <app-role-master [actionType]="actionType" *ngIf="open" [open]="open" (closeForm)="closeDrawer()">
+    </app-role-master>
+    }
 </div>

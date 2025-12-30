@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 export interface TableColumn {
   key: string;
   title: string;
+  type: string;
 }
 
 export interface TableAction {
@@ -20,7 +21,7 @@ export interface TableAction {
   selector: 'cm-datatable',
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './cm-table.component.html',
-  standalone : true
+  standalone: true
 })
 export class CmTableComponent implements OnInit {
 
@@ -46,16 +47,16 @@ export class CmTableComponent implements OnInit {
 
 
   /* ================= Filtering ================= */
- filteredData = computed(() => {
-  const text = this.searchText().toLowerCase();
-  const rows = this.data(); // 👈 signal read
+  filteredData = computed(() => {
+    const text = this.searchText().toLowerCase();
+    const rows = this.data(); // 👈 signal read
 
-  return rows.filter(row =>
-    Object.values(row).some(val =>
-      String(val).toLowerCase().includes(text)
-    )
-  );
-});
+    return rows.filter(row =>
+      Object.values(row).some(val =>
+        String(val).toLowerCase().includes(text)
+      )
+    );
+  });
 
   /* ================= Sorting ================= */
   sort(column: string) {
@@ -103,5 +104,7 @@ export class CmTableComponent implements OnInit {
     this.currentPage.set(page);
   }
 
-  
+  onCheckboxChange(row: any, key: string) {
+    console.log(`${key} changed to`, row[key], row);
+  }
 }

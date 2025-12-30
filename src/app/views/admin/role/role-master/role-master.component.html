@@ -1,171 +1,210 @@
-<div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
-    <div class="rounded-t bg-white mb-0 px-6 py-6">
-        <div class="text-center flex justify-between">
-            <h6 class="text-blueGray-700 text-xl font-bold">Roles Management</h6>
-            <app-cm-button type="button" btnText="Back To List"
-                class="click-btn btn-style3 bg-blueGray-700 text-white active:bg-red-700 font-bold uppercase text-xs rounded shadow hover:shadow-md"
-                (click)="backToList()">
+@if(open){
+<div class="fixed top-0 right-0 h-screen w-1/2 z-50
+         bg-gray-100 border-l border-gray-300 shadow-2xl
+         overflow-y-auto scroll-smooth
+         transform transition-transform duration-700 ease-in-out
+         translate-x-full" [class.translate-x-0]="open">
 
-            </app-cm-button>
-        </div>
+    <!-- HEADER -->
+    <div class="bg-gray-900 text-white px-6 py-4
+           flex items-center justify-between
+           border-b border-gray-700 sticky top-0 z-10">
+        <h1 class="text-lg font-semibold tracking-wide">
+            Roles Management
+        </h1>
+        <button class="text-gray-400 hover:text-white text-xl" (click)="close()">
+            ✕
+        </button>
     </div>
-    <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-        <form>
-            <div class="max-w-5xl mx-auto bg-blueGray-50 p-8 rounded-xl shadow-lg">
 
-                <!-- HEADER -->
-                <h2 class="text-2xl font-bold text-blueGray-700 mb-10 text-center">
-                    Role Creation Wizard
-                </h2>
+    <!-- CONTENT WRAPPER -->
+    <div class="max-w-6xl mx-auto mt-8 px-6">
 
-                <!-- STEPPER -->
-                <div class="relative flex items-center justify-between mb-16">
+        <!-- MAIN CARD -->
+        <div class="bg-white border border-gray-300 rounded-lg shadow-sm p-8">
 
-                    <!-- PROGRESS BAR -->
-                    <div class="absolute top-5 left-0 w-full h-1 bg-gray-200 rounded">
-                        <div class="h-1 rounded bg-gradient-to-r from-blue-500 to-indigo-600 transition-all duration-500"
-                            [style.width.%]="(currentStep - 1) * 50">
-                        </div>
-                    </div>
+            <!-- TITLE -->
+            <h2 class="text-xl font-semibold text-gray-900
+               text-center mb-10 tracking-wide">
+                Create New Role
+            </h2>
 
-                    <!-- STEP 1 -->
-                    <div class="relative z-10 flex flex-col items-center cursor-pointer" (click)="goTo(1)">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold shadow-md transition"
-                            [ngClass]="currentStep >= 1
-          ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white'
-          : 'bg-white text-gray-400 border'">
-                            🧑
-                        </div>
-                        <span class="mt-3 text-sm font-semibold">Role Info</span>
-                    </div>
+            <!-- STEPPER -->
+            <div class="relative flex justify-between items-center mb-12">
 
-                    <!-- STEP 2 -->
-                    <div class="relative z-10 flex flex-col items-center cursor-pointer" (click)="goTo(2)">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold shadow-md transition"
-                            [ngClass]="currentStep >= 2
-          ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white'
-          : 'bg-white text-gray-400 border'">
-                            📋
-                        </div>
-                        <span class="mt-3 text-sm font-semibold">Menu Access</span>
-                    </div>
-
-                    <!-- STEP 3 -->
-                    <div class="relative z-10 flex flex-col items-center cursor-pointer" (click)="goTo(3)">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold shadow-md transition"
-                            [ngClass]="currentStep === 3
-          ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white'
-          : 'bg-white text-gray-400 border'">
-                            ✅
-                        </div>
-                        <span class="mt-3 text-sm font-semibold">Review</span>
-                    </div>
+                <!-- TRACK -->
+                <div class="absolute left-0 right-0 top-5 h-px bg-gray-300"></div>
+                <div class="absolute left-0 top-5 h-px bg-gray-900 transition-all duration-300"
+                    [style.width.%]="(currentStep - 1) * 50">
                 </div>
 
-                <!-- CONTENT CARD -->
-                <div class="bg-white rounded-xl shadow p-8 transition-all duration-300">
+                <!-- STEPS -->
+                <ng-container *ngFor="let step of [1,2,3]">
+                    <div class="relative z-10 flex flex-col items-center cursor-pointer" (click)="goTo(step)">
 
-                    <!-- STEP 1 -->
-                    <div *ngIf="currentStep === 1" class="animate-fade">
-                        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-                            Role Configuration
-                        </h6>
-                        <div class="flex flex-wrap">
-                            <div class="w-full lg:w-6/12 px-4">
-                                <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                        htmlFor="grid-password">
-                                        Role Name
-                                    </label>
-                                    <app-cm-input placeholder="Role Name" formControlName="roleName"></app-cm-input>
-                                </div>
-                            </div>
-                            <div class="w-full lg:w-6/12 px-4">
-                                <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                        htmlFor="grid-password">
-                                        Description
-                                    </label>
-                                    <app-cm-textarea placeholder="Description"
-                                        formControlName="description"></app-cm-textarea>
-                                </div>
-                            </div>
-                            <div class="w-full lg:w-6/12 px-4">
-                                <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                        htmlFor="grid-password">
-                                        Active
-                                    </label>
-                                    <app-cm-toggle labelVal="Active" formControlName="isActive"></app-cm-toggle>
-                                </div>
-                            </div>
+                        <div class="w-9 h-9 rounded-full flex items-center justify-center
+                     text-sm font-semibold border" [ngClass]="currentStep >= step
+                ? 'bg-gray-900 text-white border-gray-900'
+                : 'bg-white text-gray-500 border-gray-300'">
+                            {{ step }}
                         </div>
 
-                        <hr class="mt-6 border-b-1 border-blueGray-300" />
-
-                        <div class="text-center mt-6">
-                            <div class="w-full mt-6 px-4">
-                                <app-cm-button type="submit" btnText="Create Role" (click)="submitForm()">
-
-                                </app-cm-button>
-                                <!-- <button type="button" (click)="submitForm()"
-                    class="">
-                    Submit
-                </button> -->
-                            </div>
-                        </div>
+                        <span class="mt-2 text-xs font-medium text-gray-700 uppercase tracking-wide">
+                            {{ step === 1 ? 'Role Info' : step === 2 ? 'Menu Access' : 'Review' }}
+                        </span>
                     </div>
+                </ng-container>
 
-                    <!-- STEP 2 -->
-                    <div *ngIf="currentStep === 2" class="animate-fade">
-                        <h3 class="text-lg font-semibold mb-4">Menu Permissions</h3>
-
-                        <div class="space-y-4">
-                            <label class="flex items-center space-x-3">
-                                <input type="checkbox" class="w-5 h-5">
-                                <span>Dashboard</span>
-                            </label>
-                            <label class="flex items-center space-x-3">
-                                <input type="checkbox" class="w-5 h-5">
-                                <span>User Management</span>
-                            </label>
-                            <label class="flex items-center space-x-3">
-                                <input type="checkbox" class="w-5 h-5">
-                                <span>Reports</span>
-                            </label>
-                        </div>
-
-                        <div class="flex justify-between mt-8">
-                            <button class="bg-gray-300 text-gray-700 px-8 py-2 rounded-lg"
-                                (click)="prev()">Back</button>
-                            <button
-                                class="bg-indigo-600 text-white px-8 py-2 rounded-lg shadow hover:scale-105 transition"
-                                (click)="next()">Next</button>
-                        </div>
-                    </div>
-
-                    <!-- STEP 3 -->
-                    <div *ngIf="currentStep === 3" class="animate-fade">
-                        <h3 class="text-lg font-semibold mb-4">Review & Submit</h3>
-
-                        <div class="bg-blueGray-50 p-4 rounded mb-6">
-                            <p><b>Role:</b> Admin</p>
-                            <p><b>Menus:</b> Dashboard, Users</p>
-                        </div>
-
-                        <div class="flex justify-between">
-                            <button class="bg-gray-300 text-gray-700 px-8 py-2 rounded-lg"
-                                (click)="prev()">Back</button>
-                            <button
-                                class="bg-green-600 text-white px-8 py-2 rounded-lg shadow hover:scale-105 transition">
-                                Create Role
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
             </div>
 
-        </form>
+            <!-- STEP CONTENT -->
+            <div class="bg-gray-50 border border-gray-300 rounded-lg p-6">
+
+                <!-- STEP 1 -->
+                <div *ngIf="currentStep === 1" class="space-y-6">
+
+                    <h3 class="text-sm font-semibold text-gray-800 uppercase tracking-wider">
+                        Role Information
+                    </h3>
+                    <hr class="border-gray-300">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">
+                                Role Name
+                            </label>
+                            <app-cm-input placeholder="Enter role name" formControlName="roleName">
+                            </app-cm-input>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">
+                                Description
+                            </label>
+                            <app-cm-textarea placeholder="Enter description" formControlName="description">
+                            </app-cm-textarea>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <app-cm-toggle labelVal="Active" formControlName="isActive">
+                            </app-cm-toggle>
+                            <span class="text-sm text-gray-600">
+                                Enable this role
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- STEP 2 -->
+                <div *ngIf="currentStep === 2" class="space-y-6">
+
+                    <h3 class="text-sm font-semibold text-gray-800 uppercase tracking-wider">
+                        Menu Permissions
+                    </h3>
+                    <hr class="border-gray-300">
+
+                    <cm-datatable [columns]="columns" [data]="userList" [pageSize]="5" [actions]="actions"
+                        [showActions]="false">
+                    </cm-datatable>
+
+                </div>
+
+                <!-- STEP 3 -->
+                <div *ngIf="currentStep === 3" class="space-y-6">
+
+                    <h3 class="text-sm font-semibold text-gray-800 uppercase tracking-wider">
+                        Review & Confirm
+                    </h3>
+                    <hr class="border-gray-300">
+
+                    <!-- SUMMARY -->
+                    <div class="bg-white border border-gray-300 rounded p-4 text-sm space-y-1">
+                        <p><b>Role Name:</b> Admin</p>
+                        <p><b>Status:</b> Active</p>
+                    </div>
+
+                    <!-- REVIEW TABLE -->
+                    <div class="bg-white border border-gray-300 rounded overflow-x-auto">
+
+                        <table class="w-full text-sm border-collapse">
+                            <thead class="bg-gray-900 text-white">
+                                <tr>
+                                    <th class="border border-gray-700 p-2 text-left">Menu</th>
+                                    <th class="border border-gray-700 p-2 text-center">View</th>
+                                    <th class="border border-gray-700 p-2 text-center">Add</th>
+                                    <th class="border border-gray-700 p-2 text-center">Update</th>
+                                    <th class="border border-gray-700 p-2 text-center">Delete</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let row of userList" class="hover:bg-gray-100">
+                                    <td class="border border-gray-300 p-2 font-medium">
+                                        {{ row.menuName }}
+                                    </td>
+
+                                    <td class="border border-gray-300 p-2 text-center">
+                                        <span class="px-2 py-1 rounded text-xs font-semibold" [ngClass]="row.isView
+                        ? 'bg-gray-800 text-white'
+                        : 'bg-gray-300 text-gray-700'">
+                                            {{ row.isView ? 'Access' : 'No Access' }}
+                                        </span>
+                                    </td>
+
+                                    <td class="border border-gray-300 p-2 text-center">
+                                        <span class="px-2 py-1 rounded text-xs font-semibold" [ngClass]="row.isAdd
+                        ? 'bg-gray-800 text-white'
+                        : 'bg-gray-300 text-gray-700'">
+                                            {{ row.isAdd ? 'Access' : 'No Access' }}
+                                        </span>
+                                    </td>
+
+                                    <td class="border border-gray-300 p-2 text-center">
+                                        <span class="px-2 py-1 rounded text-xs font-semibold" [ngClass]="row.isEdit
+                        ? 'bg-gray-800 text-white'
+                        : 'bg-gray-300 text-gray-700'">
+                                            {{ row.isEdit ? 'Access' : 'No Access' }}
+                                        </span>
+                                    </td>
+
+                                    <td class="border border-gray-300 p-2 text-center">
+                                        <span class="px-2 py-1 rounded text-xs font-semibold" [ngClass]="row.isDelete
+                        ? 'bg-gray-800 text-white'
+                        : 'bg-gray-300 text-gray-700'">
+                                            {{ row.isDelete ? 'Access' : 'No Access' }}
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr *ngIf="userList.length === 0">
+                                    <td colspan="5" class="p-4 text-center text-gray-500">
+                                        No menu permissions selected
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- FOOTER -->
+            <div class="flex justify-between items-center mt-8 pt-6 border-t border-gray-300">
+
+                <app-cm-button *ngIf="currentStep !== 1" btnText="Back"
+                    class="px-6 py-2 bg-gray-300 text-black rounded hover:bg-gray-400" (click)="prev()">
+                </app-cm-button>
+
+                <app-cm-button btnText="Next" class="px-6 py-2 bg-gray-900 text-white rounded hover:bg-black"
+                    (click)="next()">
+                </app-cm-button>
+
+            </div>
+
+        </div>
     </div>
 </div>
+}

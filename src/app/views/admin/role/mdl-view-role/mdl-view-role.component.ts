@@ -29,7 +29,7 @@ export class MdlViewRoleComponent implements OnInit {
 
   ngOnInit(): void {
     this.signUpForm = this.fb.group({
-      roleName: ['', [Validators.required]],
+      roleName: ['', [Validators.required,]],
       description: ['', Validators.required],
       isActive: ['', [Validators.required]],
     });

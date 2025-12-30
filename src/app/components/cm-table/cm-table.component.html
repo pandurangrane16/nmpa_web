@@ -1,64 +1,71 @@
 <div class="p-4 bg-white shadow rounded-xl w-full">
 
-    <!-- Search -->
-    @if(enableSearch){
-    <input
-        type="text"
-        class="border p-2 rounded w-full mb-3"
-        placeholder="Search..."
-        [ngModel]="searchText()"
+    <!-- SEARCH -->
+    @if (enableSearch) {
+    <input type="text" class="border p-2 rounded w-full mb-3" placeholder="Search..." [ngModel]="searchText()"
         (ngModelChange)="searchText.set($event); currentPage.set(1)" />
     }
 
     <!-- TABLE WRAPPER -->
     <div class="overflow-x-auto sm:overflow-visible">
 
-        <table
-            class="min-w-max sm:min-w-full w-full border-collapse border">
+        <table class="min-w-max sm:min-w-full w-full border-collapse border">
 
-            <!-- HEADER -->
+            <!-- TABLE HEADER -->
             <thead>
                 <tr class="bg-gray-100">
 
-                    <th
-                        *ngFor="let col of columns"
-                        class="p-2 border cursor-pointer select-none whitespace-nowrap"
+                    <th *ngFor="let col of columns"
+                        class="p-2 border cursor-pointer select-none whitespace-nowrap text-center"
                         (click)="sort(col.key)">
+
                         {{ col.title }}
+
                         <span *ngIf="sortedColumn() === col.key">
                             {{ sortDirection() === 'asc' ? '▲' : '▼' }}
                         </span>
+
                     </th>
 
-                    <th *ngIf="showActions" class="p-2 border whitespace-nowrap">
+                    <th *ngIf="showActions" class="p-2 border whitespace-nowrap text-center">
                         Actions
                     </th>
+
                 </tr>
             </thead>
 
-            <!-- BODY -->
+            <!-- TABLE BODY -->
             <tbody>
 
                 <tr *ngFor="let row of paginatedData()" class="hover:bg-gray-50">
 
-                    <td
-                        *ngFor="let col of columns"
-                        class="p-2 border whitespace-nowrap">
-                        {{ row[col.key] }}
+                    <td *ngFor="let col of columns" class="p-2 border text-center whitespace-nowrap">
+
+                        <!-- CHECKBOX COLUMN -->
+                        <ng-container *ngIf="col.type === 'checkbox'; else textCell">
+                            <input type="checkbox" class="w-4 h-4 cursor-pointer accent-blue-600"
+                                [(ngModel)]="row[col.key]" (change)="onCheckboxChange(row, col.key)" />
+                        </ng-container>
+
+                        <!-- TEXT COLUMN -->
+                        <ng-template #textCell>
+                            {{ row[col.key] }}
+                        </ng-template>
+
                     </td>
 
-                    <td *ngIf="showActions" class="p-2 border">
-                        <div class="flex flex-wrap gap-2">
+                    <!-- ACTIONS -->
+                    <td *ngIf="showActions" class="p-2 border text-center">
+                        <div class="flex items-center justify-center gap-3 whitespace-nowrap">
+
                             <ng-container *ngFor="let action of actions">
-                                <button
-                                    *ngIf="!action.show || action.show(row)"
-                                    type="button"
-                                    class="px-3 py-1 text-sm rounded whitespace-nowrap"
-                                    [ngClass]="action.class"
+                                <button *ngIf="!action.show || action.show(row)" type="button"
+                                    class="px-3 py-1 text-sm rounded" [ngClass]="action.class"
                                     (click)="action.callback(row)">
                                     {{ action.label }}
                                 </button>
                             </ng-container>
+
                         </div>
                     </td>
 
@@ -66,25 +73,21 @@
 
                 <!-- NO DATA -->
                 <tr *ngIf="paginatedData().length === 0">
-                    <td
-                        class="p-3 text-center text-gray-500"
-                        [attr.colspan]="columns.length + (showActions ? 1 : 0)">
+                    <td class="p-3 text-center text-gray-500" [attr.colspan]="columns.length + (showActions ? 1 : 0)">
                         No records found
                     </td>
                 </tr>
 
             </tbody>
+
         </table>
     </div>
 
     <!-- PAGINATION -->
     <div class="flex justify-between items-center mt-4 flex-wrap gap-3">
 
-        <button
-            type="button"
-            class="px-3 py-1 border rounded disabled:opacity-50"
-            (click)="changePage(currentPage() - 1)"
-            [disabled]="currentPage() === 1">
+        <button type="button" class="px-3 py-1 border rounded disabled:opacity-50"
+            (click)="changePage(currentPage() - 1)" [disabled]="currentPage() === 1">
             Prev
         </button>
 
@@ -92,11 +95,8 @@
             Page {{ currentPage() }} of {{ totalPages() }}
         </span>
 
-        <button
-            type="button"
-            class="px-3 py-1 border rounded disabled:opacity-50"
-            (click)="changePage(currentPage() + 1)"
-            [disabled]="currentPage() === totalPages()">
+        <button type="button" class="px-3 py-1 border rounded disabled:opacity-50"
+            (click)="changePage(currentPage() + 1)" [disabled]="currentPage() === totalPages()">
             Next
         </button>
 

@@ -23,27 +23,25 @@
                     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
                         <form [formGroup]="signUpForm" class="mt-6">
                             <div class="relative w-full mb-3">
-                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                    htmlFor="grid-password">
+                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                                     Role Name
                                 </label>
                                 <app-cm-input placeholder="Role Name" formControlName="roleName"
-                                    [readOnly]="true"></app-cm-input>
+                                    [readOnly]="this.actionType == 'view'"></app-cm-input>
                             </div>
 
                             <div class="relative w-full mb-3">
-                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                    htmlFor="grid-password">
+                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                                     Description
                                 </label>
-                                <app-cm-textarea placeholder="Description"
-                                    formControlName="description"></app-cm-textarea>
+                                <app-cm-textarea placeholder="Description" formControlName="description"
+                                    [readOnly]="this.actionType == 'view'"></app-cm-textarea>
                             </div>
 
 
                             <div class="flex gap-6 mt-6">
 
-                                <app-cm-button
+                                <app-cm-button [disabled]="this.actionType == 'view'"
                                     class="flex-1 bg-blueGray-600 text-white rounded shadow click-btn btn-style3"
                                     btnText="Submit">
                                 </app-cm-button>

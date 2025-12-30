@@ -21,14 +21,14 @@ import { CmButton } from "../../../../components/cm-button/cm-button";
     CmSelectComponent,
     CmTableComponent,
     CmButton
-],
+  ],
   templateUrl: './workflow-level.component.html',
   styleUrl: './workflow-level.component.css',
 })
 export class WorkflowLevelComponent implements OnInit {
 
   workflowLevelForm!: FormGroup;
-  isWorkflowSelected : boolean = true;
+  isWorkflowSelected: boolean = true;
 
   /** 🔹 Role dropdown */
   userList = [
@@ -40,16 +40,16 @@ export class WorkflowLevelComponent implements OnInit {
 
   /** 🔹 Datatable columns */
   columns = [
-    { key: 'workflow', title: 'Workflow' },
-    { key: 'levelName', title: 'Level Name' },
-    { key: 'levelNumber', title: 'Level Number' },
-    { key: 'assignedTo', title: 'Role' }
+    { key: 'workflow', title: 'Workflow', type: "string" },
+    { key: 'levelName', title: 'Level Name', type: "string" },
+    { key: 'levelNumber', title: 'Level Number', type: "string" },
+    { key: 'assignedTo', title: 'Role', type: "string" }
   ];
 
   /** 🔹 Data shown in cm-datatable */
   datatableData: any[] = [];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.workflowLevelForm = this.fb.group({

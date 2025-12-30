@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-list-view',
   standalone: true,
-  imports: [CmTableComponent, MdlCompanyViewComponent,CommonModule],
+  imports: [CmTableComponent, MdlCompanyViewComponent, CommonModule],
   templateUrl: './list-view.component.html',
   styleUrl: './list-view.component.css',
 })
@@ -17,9 +17,9 @@ export class ListViewComponent {
   selectedRow: any;
 
   columns = [
-    { key: 'id', title: 'Company ID' },
-    { key: 'name', title: 'Company Name' },
-    { key: 'email', title: 'Email' },
+    { key: 'id', title: 'Company ID', type: "string" },
+    { key: 'name', title: 'Company Name', type: "string" },
+    { key: 'email', title: 'Email', type: "string" },
   ];
 
   userList = [
