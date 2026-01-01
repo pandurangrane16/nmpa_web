@@ -33,6 +33,30 @@ export class RoleMasterComponent {
     { menuName: 'User Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
     { menuName: 'Role Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
     { menuName: 'Workflow Configuration', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'User Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'Role Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'Workflow Configuration', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'User Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'Role Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'Workflow Configuration', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'User Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'Role Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'Workflow Configuration', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'User Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'Role Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'Workflow Configuration', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'User Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'Role Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'Workflow Configuration', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'User Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'Role Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'Workflow Configuration', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'User Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'Role Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'Workflow Configuration', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'User Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'Role Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
+    { menuName: 'Workflow Configuration', isView: null, isAdd: null, isEdit: null, isDelete: null },
   ];
 
   actions = [];
@@ -47,17 +71,17 @@ export class RoleMasterComponent {
 
   currentStep = 1;
 
-  next() {
-    if (this.currentStep < 3) {
-      this.currentStep++;
-    }
-  }
+  // next() {
+  //   if (this.currentStep < 3) {
+  //     this.currentStep++;
+  //   }
+  // }
 
-  prev() {
-    if (this.currentStep > 1) {
-      this.currentStep--;
-    }
-  }
+  // prev() {
+  //   if (this.currentStep > 1) {
+  //     this.currentStep--;
+  //   }
+  // }
 
   goTo(step: number) {
     this.currentStep = step;
@@ -65,4 +89,35 @@ export class RoleMasterComponent {
   close() {
     this.closeForm.emit();
   }
+
+  nextStep() {
+    if (this.currentStep < 3) {
+      this.currentStep++;
+    }
+  }
+
+  prevStep() {
+    if (this.currentStep > 1) {
+      this.currentStep--;
+    }
+  }
+
+  step = 1;
+
+  next(): void {
+    if (this.step < 3) {
+      this.step++;
+    }
+  }
+
+  prev(): void {
+    if (this.step > 1) {
+      this.step--;
+    }
+  }
+
+  isActiveStep(current: number): boolean {
+    return this.step === current;
+  }
+
 }

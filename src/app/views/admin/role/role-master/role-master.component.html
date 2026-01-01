@@ -1,210 +1,226 @@
 @if(open){
-<div class="fixed top-0 right-0 h-screen w-1/2 z-50
-         bg-gray-100 border-l border-gray-300 shadow-2xl
-         overflow-y-auto scroll-smooth
-         transform transition-transform duration-700 ease-in-out
+<div class="fixed top-0 right-0 h-screen w-1/2 bg-white z-50 shadow-xl
+         transform transition-transform duration-1000 ease-in-out
          translate-x-full" [class.translate-x-0]="open">
 
-    <!-- HEADER -->
-    <div class="bg-gray-900 text-white px-6 py-4
-           flex items-center justify-between
-           border-b border-gray-700 sticky top-0 z-10">
-        <h1 class="text-lg font-semibold tracking-wide">
-            Roles Management
-        </h1>
-        <button class="text-gray-400 hover:text-white text-xl" (click)="close()">
-            ✕
-        </button>
-    </div>
+    <!-- MAIN FLEX COLUMN -->
+    <div class="flex flex-col h-full">
 
-    <!-- CONTENT WRAPPER -->
-    <div class="max-w-6xl mx-auto mt-8 px-6">
-
-        <!-- MAIN CARD -->
-        <div class="bg-white border border-gray-300 rounded-lg shadow-sm p-8">
-
-            <!-- TITLE -->
-            <h2 class="text-xl font-semibold text-gray-900
-               text-center mb-10 tracking-wide">
-                Create New Role
-            </h2>
-
-            <!-- STEPPER -->
-            <div class="relative flex justify-between items-center mb-12">
-
-                <!-- TRACK -->
-                <div class="absolute left-0 right-0 top-5 h-px bg-gray-300"></div>
-                <div class="absolute left-0 top-5 h-px bg-gray-900 transition-all duration-300"
-                    [style.width.%]="(currentStep - 1) * 50">
-                </div>
-
-                <!-- STEPS -->
-                <ng-container *ngFor="let step of [1,2,3]">
-                    <div class="relative z-10 flex flex-col items-center cursor-pointer" (click)="goTo(step)">
-
-                        <div class="w-9 h-9 rounded-full flex items-center justify-center
-                     text-sm font-semibold border" [ngClass]="currentStep >= step
-                ? 'bg-gray-900 text-white border-gray-900'
-                : 'bg-white text-gray-500 border-gray-300'">
-                            {{ step }}
-                        </div>
-
-                        <span class="mt-2 text-xs font-medium text-gray-700 uppercase tracking-wide">
-                            {{ step === 1 ? 'Role Info' : step === 2 ? 'Menu Access' : 'Review' }}
-                        </span>
-                    </div>
-                </ng-container>
-
+        <!-- ================= HEADER (FIXED) ================= -->
+        <div class="shrink-0 sticky top-0 z-20 bg-white border-b">
+            <div class="mt-6 mx-4 bg-ash-grey text-white shadow-sm rounded-lg px-6 py-4
+                  flex justify-between items-center">
+                <h1 class="text-xl font-semibold text-gray-800">
+                    Roles Management
+                </h1>
+                <button class="hover:text-black text-xl" (click)="close()">✕</button>
             </div>
+        </div>
 
-            <!-- STEP CONTENT -->
-            <div class="bg-gray-50 border border-gray-300 rounded-lg p-6">
+        <!-- ================= SCROLLABLE CONTENT ================= -->
+        <div class=" flex-1 overflow-y-auto scrollbar-thin px-6 py-6">
 
-                <!-- STEP 1 -->
-                <div *ngIf="currentStep === 1" class="space-y-6">
+            <div class="bg-gradient-to-br from-gray-100 to-gray-200 min-h-full p-6">
 
-                    <h3 class="text-sm font-semibold text-gray-800 uppercase tracking-wider">
-                        Role Information
-                    </h3>
-                    <hr class="border-gray-300">
+                <div class="marginPx-20 max-w-6xl mx-auto bg-white rounded-2xl shadow-2xl p-10">
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- ================= STEPPER ================= -->
+                    <div class="marginPx-20 relative flex justify-between items-center mb-14">
 
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-600 mb-1">
-                                Role Name
-                            </label>
-                            <app-cm-input placeholder="Enter role name" formControlName="roleName">
-                            </app-cm-input>
+                        <div class="absolute top-6 left-0 right-0 h-[3px]
+                     bg-gradient-to-r from-gray-300 via-black to-gray-300">
                         </div>
 
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-600 mb-1">
-                                Description
-                            </label>
-                            <app-cm-textarea placeholder="Enter description" formControlName="description">
-                            </app-cm-textarea>
+                        <!-- STEP 1 -->
+                        <div class="relative z-10 text-center">
+                            <div class="w-12 h-12 mx-auto rounded-full flex items-center justify-center text-lg shadow-lg"
+                                [ngClass]="isActiveStep(1)
+                  ? 'bg-black text-white'
+                  : 'bg-gray-300 text-gray-700'">
+                                🧾
+                            </div>
+                            <p class="mt-3 text-sm font-semibold text-gray-700">
+                                Role Info
+                            </p>
                         </div>
 
-                        <div class="flex items-center gap-3">
-                            <app-cm-toggle labelVal="Active" formControlName="isActive">
-                            </app-cm-toggle>
-                            <span class="text-sm text-gray-600">
-                                Enable this role
-                            </span>
+                        <!-- STEP 2 -->
+                        <div class="relative z-10 text-center">
+                            <div class="w-12 h-12 mx-auto rounded-full flex items-center justify-center text-lg shadow"
+                                [ngClass]="isActiveStep(2)
+                  ? 'bg-black text-white'
+                  : 'bg-gray-300 text-gray-700'">
+                                🔐
+                            </div>
+                            <p class="mt-3 text-sm font-semibold text-gray-700">
+                                Menu Access
+                            </p>
+                        </div>
+
+                        <!-- STEP 3 -->
+                        <div class="relative z-10 text-center">
+                            <div class="w-12 h-12 mx-auto rounded-full flex items-center justify-center text-lg shadow"
+                                [ngClass]="isActiveStep(3)
+                  ? 'bg-black text-white'
+                  : 'bg-gray-300 text-gray-700'">
+                                ✅
+                            </div>
+                            <p class="mt-3 text-sm font-semibold text-gray-700">
+                                Review
+                            </p>
                         </div>
 
                     </div>
-                </div>
 
-                <!-- STEP 2 -->
-                <div *ngIf="currentStep === 2" class="space-y-6">
+                    <!-- ================= STEP 1 ================= -->
+                    <div *ngIf="step === 1" class="marginPx-20 ">
 
-                    <h3 class="text-sm font-semibold text-gray-800 uppercase tracking-wider">
-                        Menu Permissions
-                    </h3>
-                    <hr class="border-gray-300">
+                        <h3 class="text-lg font-semibold text-gray-700">
+                            Role Information
+                        </h3>
+                        <hr class="my-4">
 
-                    <cm-datatable [columns]="columns" [data]="userList" [pageSize]="5" [actions]="actions"
-                        [showActions]="false">
-                    </cm-datatable>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">
+                                    Role Name
+                                </label>
+                                <app-cm-input placeholder="Enter role name" formControlName="roleName">
+                                </app-cm-input>
+                            </div>
 
-                <!-- STEP 3 -->
-                <div *ngIf="currentStep === 3" class="space-y-6">
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">
+                                    Description
+                                </label>
+                                <app-cm-textarea placeholder="Enter description" formControlName="description">
+                                </app-cm-textarea>
+                            </div>
 
-                    <h3 class="text-sm font-semibold text-gray-800 uppercase tracking-wider">
-                        Review & Confirm
-                    </h3>
-                    <hr class="border-gray-300">
+                            <div class="flex items-center gap-3">
+                                <app-cm-toggle labelVal="Active" formControlName="isActive">
+                                </app-cm-toggle>
+                                <span class="text-sm text-gray-600">
+                                    Active
+                                </span>
+                            </div>
 
-                    <!-- SUMMARY -->
-                    <div class="bg-white border border-gray-300 rounded p-4 text-sm space-y-1">
-                        <p><b>Role Name:</b> Admin</p>
-                        <p><b>Status:</b> Active</p>
+                        </div>
                     </div>
 
-                    <!-- REVIEW TABLE -->
-                    <div class="bg-white border border-gray-300 rounded overflow-x-auto">
+                    <!-- ================= STEP 2 ================= -->
+                    <div *ngIf="step === 2">
 
-                        <table class="w-full text-sm border-collapse">
-                            <thead class="bg-gray-900 text-white">
-                                <tr>
-                                    <th class="border border-gray-700 p-2 text-left">Menu</th>
-                                    <th class="border border-gray-700 p-2 text-center">View</th>
-                                    <th class="border border-gray-700 p-2 text-center">Add</th>
-                                    <th class="border border-gray-700 p-2 text-center">Update</th>
-                                    <th class="border border-gray-700 p-2 text-center">Delete</th>
-                                </tr>
-                            </thead>
+                        <div class="bg-gray-50 border rounded-xl p-8 shadow-inner">
+                            <h3 class="text-lg font-semibold text-gray-700">
+                                Menu Permissions
+                            </h3>
+                            <hr class="my-4">
 
-                            <tbody>
-                                <tr *ngFor="let row of userList" class="hover:bg-gray-100">
-                                    <td class="border border-gray-300 p-2 font-medium">
-                                        {{ row.menuName }}
-                                    </td>
+                            <cm-datatable [columns]="columns" [data]="userList" [pageSize]="5" [actions]="actions"
+                                [showActions]="false">
+                            </cm-datatable>
 
-                                    <td class="border border-gray-300 p-2 text-center">
-                                        <span class="px-2 py-1 rounded text-xs font-semibold" [ngClass]="row.isView
-                        ? 'bg-gray-800 text-white'
-                        : 'bg-gray-300 text-gray-700'">
-                                            {{ row.isView ? 'Access' : 'No Access' }}
-                                        </span>
-                                    </td>
-
-                                    <td class="border border-gray-300 p-2 text-center">
-                                        <span class="px-2 py-1 rounded text-xs font-semibold" [ngClass]="row.isAdd
-                        ? 'bg-gray-800 text-white'
-                        : 'bg-gray-300 text-gray-700'">
-                                            {{ row.isAdd ? 'Access' : 'No Access' }}
-                                        </span>
-                                    </td>
-
-                                    <td class="border border-gray-300 p-2 text-center">
-                                        <span class="px-2 py-1 rounded text-xs font-semibold" [ngClass]="row.isEdit
-                        ? 'bg-gray-800 text-white'
-                        : 'bg-gray-300 text-gray-700'">
-                                            {{ row.isEdit ? 'Access' : 'No Access' }}
-                                        </span>
-                                    </td>
-
-                                    <td class="border border-gray-300 p-2 text-center">
-                                        <span class="px-2 py-1 rounded text-xs font-semibold" [ngClass]="row.isDelete
-                        ? 'bg-gray-800 text-white'
-                        : 'bg-gray-300 text-gray-700'">
-                                            {{ row.isDelete ? 'Access' : 'No Access' }}
-                                        </span>
-                                    </td>
-                                </tr>
-
-                                <tr *ngIf="userList.length === 0">
-                                    <td colspan="5" class="p-4 text-center text-gray-500">
-                                        No menu permissions selected
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
+                        </div>
                     </div>
-                </div>
 
+                    <!-- ================= STEP 3 ================= -->
+                    <div *ngIf="step === 3">
+
+                        <div class="bg-gray-50 border rounded-xl p-8 shadow-inner">
+
+                            <h3 class="text-lg font-semibold text-gray-700">
+                                Review &amp; Confirm
+                            </h3>
+                            <hr class="my-4">
+
+                            <div class="bg-white p-4 rounded shadow-sm space-y-1 mb-6">
+                                <p><b>Role Name:</b> Admin <b>Active:</b> Yes</p>
+                            </div>
+
+                            <div class="bg-white p-4 rounded shadow-sm overflow-x-auto">
+
+                                <table class="w-full border border-collapse text-sm">
+                                    <thead class="bg-gray-100">
+                                        <tr>
+                                            <th class="border p-2 text-left">Menu</th>
+                                            <th class="border p-2 text-center">View</th>
+                                            <th class="border p-2 text-center">Add</th>
+                                            <th class="border p-2 text-center">Update</th>
+                                            <th class="border p-2 text-center">Delete</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr *ngFor="let row of userList" class="hover:bg-gray-50">
+                                            <td class="border p-2 font-medium">
+                                                {{ row.menuName }}
+                                            </td>
+
+                                            <td class="border p-2 text-center">
+                                                <span class="px-2 py-1 rounded text-xs font-semibold" [ngClass]="row.isView
+                            ? 'bg-green-100 text-green-700'
+                            : 'bg-red-100 text-red-700'">
+                                                    {{ row.isView ? 'Access' : 'No Access' }}
+                                                </span>
+                                            </td>
+
+                                            <td class="border p-2 text-center">
+                                                <span class="px-2 py-1 rounded text-xs font-semibold" [ngClass]="row.isAdd
+                            ? 'bg-green-100 text-green-700'
+                            : 'bg-red-100 text-red-700'">
+                                                    {{ row.isAdd ? 'Access' : 'No Access' }}
+                                                </span>
+                                            </td>
+
+                                            <td class="border p-2 text-center">
+                                                <span class="px-2 py-1 rounded text-xs font-semibold" [ngClass]="row.isEdit
+                            ? 'bg-green-100 text-green-700'
+                            : 'bg-red-100 text-red-700'">
+                                                    {{ row.isEdit ? 'Access' : 'No Access' }}
+                                                </span>
+                                            </td>
+
+                                            <td class="border p-2 text-center">
+                                                <span class="px-2 py-1 rounded text-xs font-semibold" [ngClass]="row.isDelete
+                            ? 'bg-green-100 text-green-700'
+                            : 'bg-red-100 text-red-700'">
+                                                    {{ row.isDelete ? 'Access' : 'No Access' }}
+                                                </span>
+                                            </td>
+                                        </tr>
+
+                                        <tr *ngIf="userList.length === 0">
+                                            <td colspan="5" class="p-3 text-center text-gray-500">
+                                                No menu permissions selected
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
+        </div>
 
-            <!-- FOOTER -->
-            <div class="flex justify-between items-center mt-8 pt-6 border-t border-gray-300">
-
-                <app-cm-button *ngIf="currentStep !== 1" btnText="Back"
-                    class="px-6 py-2 bg-gray-300 text-black rounded hover:bg-gray-400" (click)="prev()">
+        <!-- ================= FOOTER (FIXED) ================= -->
+        <div class="shrink-0 sticky bottom-0 bg-white border-t px-6 py-4 z-20">
+            <div class="flex justify-between items-center">
+                <app-cm-button *ngIf="step != 1" btnText="Back" class="px-6 py-2 bg-gray-200 rounded hover:bg-gray-300"
+                    (click)="prev()">
                 </app-cm-button>
 
-                <app-cm-button btnText="Next" class="px-6 py-2 bg-gray-900 text-white rounded hover:bg-black"
+                <app-cm-button btnText="Next" class="px-6 py-2 bg-black text-white rounded hover:bg-gray-300"
                     (click)="next()">
                 </app-cm-button>
-
             </div>
-
         </div>
+
     </div>
 </div>
 }
