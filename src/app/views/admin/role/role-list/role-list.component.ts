@@ -23,12 +23,13 @@ export class RoleListComponent {
     { key: 'id', title: 'Role ID', type: 'string' },
     { key: 'name', title: 'Role Name', type: 'string' },
     { key: 'desc', title: 'Description', type: 'string' },
+    { key: 'type', title: 'Role Type', type: 'string' },
   ];
 
   userList = [
-    { id: 1, name: 'John', desc: 'john@gmail.com' },
-    { id: 2, name: 'Smith', desc: 'smith@yahoo.com' },
-    { id: 3, name: 'Alice', desc: 'alice@outlook.com' },
+    { id: 1, name: 'John',type:'Admin', desc: 'john@gmail.com' },
+    { id: 2, name: 'Smith', type:'Company', desc: 'smith@yahoo.com' },
+    { id: 3, name: 'Alice', type:'Admin', desc: 'alice@outlook.com' },
     // …
   ];
   permissions = {

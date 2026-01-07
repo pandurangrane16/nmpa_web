@@ -6,10 +6,11 @@ import { CmButton } from '../../../../components/cm-button/cm-button';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CmTableComponent } from '../../../../components/cm-table/cm-table.component';
+import { CmSelectComponent } from '../../../../components/cm-select/cm-select.component';
 
 @Component({
   selector: 'app-role-master',
-  imports: [CmInput, CmTextarea, CmToggle, CmButton, CommonModule, CmTableComponent],
+  imports: [CmInput, CmTextarea, CmToggle, CmButton, CommonModule, CmTableComponent,CmSelectComponent],
   templateUrl: './role-master.component.html',
   styleUrl: './role-master.component.css',
 })
@@ -28,7 +29,10 @@ export class RoleMasterComponent {
     { key: 'isEdit', title: 'Edit Access', type: 'checkbox' },
     { key: 'isDelete', title: 'Delete Access', type: 'checkbox' },
   ];
-
+  roleTypes = [
+    { label: 'Admin', value: 'admin' },
+    { label: 'Company', value: 'company' }
+  ];
   userList = [
     { menuName: 'User Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
     { menuName: 'Role Master', isView: null, isAdd: null, isEdit: null, isDelete: null },
