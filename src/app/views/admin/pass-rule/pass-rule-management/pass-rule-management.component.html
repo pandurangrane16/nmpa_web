@@ -1,0 +1,151 @@
+@if(open){
+<div class="flex-1 overflow-y-auto scroll-smooth scrollbar-thin fixed top-0 right-0 h-screen w-1/2 bg-white z-50 shadow-xl
+         transform transition-transform duration-1000 ease-in-out
+         translate-x-full" [class.translate-x-0]="open">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between p-4 border-b">
+        <h2 class="text-lg font-semibold ">
+            {{ actionType === 'view' ? 'View Pass Rule' : 'Edit Pass Rule' }}
+        </h2>
+
+        <button class="text-gray-500 hover:text-black text-xl" (click)="close()">
+            ✕
+        </button>
+    </div>
+
+    <!-- Body -->
+    <div class="container mx-auto px-4 h-full">
+        <div class="flex mt-6 justify-center h-full">
+            <div class="w-full lg:w-12/12 px-4">
+                <div
+                    class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
+                    <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                        <form [formGroup]="signUpForm" class="mt-6">
+                            <div class="relative w-full mb-3">
+                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    htmlFor="grid-password">
+                                    Company Name
+                                </label>
+                                <app-cm-input placeholder="Company Name" formControlName="companyName"
+                                    [readOnly]="true"></app-cm-input>
+                            </div>
+
+                            <div class="relative w-full mb-3">
+                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    htmlFor="grid-password">
+                                    State
+                                </label>
+                                <app-cm-autoselect formControlName="state" (selectOut)="onSelect($event)">
+                                </app-cm-autoselect>
+                            </div>
+
+                            <div class="relative w-full mb-3">
+                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    htmlFor="grid-password">
+                                    Email
+                                </label>
+                                <app-cm-input placeholder="Email Address" formControlName="email"
+                                    [readOnly]="true"></app-cm-input>
+                            </div>
+
+                            <div class="relative w-full mb-3">
+                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    htmlFor="grid-password">
+                                    Contact Number
+                                </label>
+                                <app-cm-input placeholder="Contact Number" formControlName="contact"
+                                    [readOnly]="true"></app-cm-input>
+                            </div>
+
+                            <div class="relative w-full mb-3">
+                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    htmlFor="grid-password">
+                                    Supported Documents
+                                </label>
+                                <div class="bg-white shadow rounded-xl p-4 w-full">
+
+                                    <h3 class="text-lg font-semibold mb-4"></h3>
+
+                                    <table class="w-full border">
+                                        <thead>
+                                            <tr class="bg-gray-100">
+                                                <th class="p-2 border w-16 text-center">Sr No</th>
+                                                <th class="p-2 border text-left">Document Name</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr *ngFor="let doc of documents; let i = index"
+                                                class="hover:bg-gray-50 cursor-pointer" (click)="openViewer(i)">
+
+                                                <td class="p-2 border text-center">{{ i + 1 }}</td>
+
+                                                <td class="p-2 border text-blue-600 underline">
+                                                    {{ doc.name }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+
+                            <div class="flex gap-6 mt-6">
+                                <app-cm-button class="flex-1 bg-red-700 text-white rounded shadow click-btn btn-style3"
+                                    btnText="Reject Request">
+                                </app-cm-button>
+                                <!-- <button type="button"
+                                    class="flex-1 bg-blueGray-600 text-white px-6 py-3 rounded shadow click-btn btn-style3">
+                                    Approve Request
+                                </button> -->
+
+                                <app-cm-button
+                                    class="flex-1 bg-blueGray-600 text-white rounded shadow click-btn btn-style3"
+                                    btnText="Approve Request">
+                                </app-cm-button>
+                            </div>
+
+                            @if(viewerOpen){
+                            <div class="fixed inset-0 bg-black/50 z-40" (click)="closeViewer()"></div>
+
+                            <div class="fixed top-0 right-0 h-screen bg-white z-50 shadow-xl
+         w-full sm:w-4/5 md:w-2/3 lg:w-1/2
+         flex flex-col">
+
+                                <!-- HEADER -->
+                                <div class="flex justify-between items-center p-4 border-b">
+                                    <h2 class="text-lg font-semibold">
+                                        {{ documents[currentIndex].name }}
+                                    </h2>
+
+                                    <button class="text-2xl" (click)="closeViewer()">✕</button>
+                                </div>
+
+                                <!-- VIEWER -->
+                                <div class="flex-1 flex items-center justify-center bg-gray-100">
+
+                                    <!-- IMAGE VIEW -->
+                                    <img *ngIf="documents[currentIndex].type === 'image'"
+                                        [src]="documents[currentIndex].url"
+                                        class="max-h-full max-w-full object-contain" />
+
+                                    <!-- PDF VIEW -->
+                                    <iframe *ngIf="documents[currentIndex].type === 'pdf'"
+                                        [src]="documents[currentIndex].url" class="w-full h-full">
+                                    </iframe>
+
+                                </div>
+                            </div>
+                            }
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+}

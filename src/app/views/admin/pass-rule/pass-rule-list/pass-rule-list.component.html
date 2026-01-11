@@ -1,21 +1,10 @@
-<!-- <cm-datatable
-  [columns]="[
-    { key: 'id', title: 'ID' },
-    { key: 'name', title: 'Name' },
-    { key: 'email', title: 'Email' }
-  ]"
-  [data]="userList"
-  [pageSize]="5"
-></cm-datatable> -->
-
-
 <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
     <div class="rounded-t bg-white mb-0 px-6 py-6">
         <div class="text-center flex justify-between">
-            <h6 class="text-blueGray-700 text-xl font-bold">Workflows</h6>
+            <h6 class="text-blueGray-700 text-xl font-bold">Pass Rules</h6>
             <app-cm-button
                 class="click-btn btn-style3 bg-blueGray-700 text-white active:bg-red-700 font-bold uppercase text-xs px-1 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                type="button" btnText="Create New" (clicked)="CreateWorkflow()" />
+                type="button" btnText="Create New" (clicked)="CreatePassRule()" />
         </div>
     </div>
     <hr>
@@ -25,11 +14,7 @@
             </cm-datatable>
         </form>
     </div>
-</div>
 
-<!-- Delete Confirmation Modal -->
-<app-cm-modal #confirmModal title="Delete Confirmation"
-    message="Are you sure you want to delete this item? This action cannot be undone." confirmButtonText="Delete"
-    cancelButtonText="Cancel" confirmButtonClass="bg-red-600 hover:bg-red-700" (confirmed)="onDeleteConfirmed()"
-    (cancelled)="onDeleteCancelled()">
-</app-cm-modal>
+    <app-pass-rule-management *ngIf="open" [open]="open" actionType="view" (closeForm)="closeDrawer()">
+    </app-pass-rule-management>
+</div>

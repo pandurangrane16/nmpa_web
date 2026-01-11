@@ -28,6 +28,7 @@ import { ListViewComponent } from './views/admin/company/list-view/list-view.com
 import { WorkflowListComponent } from './views/admin/workflow/workflow-list/workflow-list.component';
 import { RoleListComponent } from './views/admin/role/role-list/role-list.component';
 import { RoleMasterComponent } from './views/admin/role/role-master/role-master.component';
+import { PassRuleListComponent } from './views/admin/pass-rule/pass-rule-list/pass-rule-list.component';
 
 export const routes: Routes = [
   {
@@ -44,6 +45,7 @@ export const routes: Routes = [
       { path: 'workflow-master', component: WorkflowMasterComponent },
       { path: 'workflow-level', component: WorkflowLevelComponent },
       { path: 'comp-list', component: ListViewComponent },
+      { path: 'pass-rules', component: PassRuleListComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },
